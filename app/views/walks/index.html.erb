@@ -1,0 +1,11 @@
+<h1>Liste des balades</h1>
+
+<% @walks.each do |walk| %>
+  <%= walk.name %>
+  <%= walk.description %>
+  <%= walk.date %>
+  <%# Ajouter format de date %>
+  <%= walk.time %>
+  <%= walk.location %>
+  <%= walk.number_of_dog %>
+<% end %>

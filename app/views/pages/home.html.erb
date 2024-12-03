@@ -1,1 +1,13 @@
-<h1 class="text-5xl text-amber-700 font-bold mx-auto">Dog walks</h1>
+<main class="flex flex-col items-center justify-center mx-auto gap-3">
+  <h1 class="text-5xl text-amber-700 font-bold mx-auto">Dog walks</h1>
+
+  <% if user_signed_in? %>
+    <p class="text-2xl text-amber-700 font-bold mx-auto">Hello <%= current_user.first_name %> <%= current_user.last_name %></p>
+  <% else %>
+    <p class="text-2xl text-amber-700 font-bold mx-auto">Welcome to Dog walks</p>
+  <% end %>
+</main>
+
+
+
+<%= current_user.dog.name %>

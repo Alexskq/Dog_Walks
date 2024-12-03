@@ -4,7 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-    has_many :dogs
+    has_one :dog, dependent: :destroy
+    accepts_nested_attributes_for :dog
 
    validates :first_name, presence: true
    validates :last_name, presence: true

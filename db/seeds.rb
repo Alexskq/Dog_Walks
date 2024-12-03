@@ -8,7 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-puts "Destroying users..."
+puts 'Destroying users...'
 User.destroy_all
+puts 'Destroying walks...'
+Walk.destroy_all
 
-puts "Done..."
+puts 'Done...'

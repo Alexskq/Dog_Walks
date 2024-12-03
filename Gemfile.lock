@@ -114,6 +114,7 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
+    flatpickr (4.6.13.1)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -345,6 +346,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.2)
+  flatpickr
   importmap-rails
   kamal
   pg (~> 1.1)

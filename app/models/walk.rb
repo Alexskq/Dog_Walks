@@ -1,3 +1,3 @@
 class Walk < ApplicationRecord
-  has_many :dogs, through: :dog_walks
+  has_many :users, through: :user_walks
 end

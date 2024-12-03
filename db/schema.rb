@@ -10,18 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_03_090148) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_03_095329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
-
-  create_table "dog_walks", force: :cascade do |t|
-    t.bigint "dog_id", null: false
-    t.bigint "walk_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dog_id"], name: "index_dog_walks_on_dog_id"
-    t.index ["walk_id"], name: "index_dog_walks_on_walk_id"
-  end
 
   create_table "dogs", force: :cascade do |t|
     t.string "name"
@@ -29,6 +20,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_090148) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_dogs_on_user_id"
+  end
+
+  create_table "user_walks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "walk_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_walks_on_user_id"
+    t.index ["walk_id"], name: "index_user_walks_on_walk_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,7 +53,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_090148) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "dog_walks", "dogs"
-  add_foreign_key "dog_walks", "walks"
   add_foreign_key "dogs", "users"
+  add_foreign_key "user_walks", "dogs", column: "user_id"
+  add_foreign_key "user_walks", "walks"
 end

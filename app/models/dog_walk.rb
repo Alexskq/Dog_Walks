@@ -1,4 +1,4 @@
 class DogWalk < ApplicationRecord
-  belongs_to :dog
+  belongs_to :user
   belongs_to :walk
 end

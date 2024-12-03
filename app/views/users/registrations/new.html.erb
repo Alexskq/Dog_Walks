@@ -1,29 +1,41 @@
-<h2>Sign up</h2>
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :first_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "given-name" }%>
-    <%= f.input :last_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "family-name" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+<section class="flex flex-col items-center justify-center">
+  <h1 class="text-center text-amber-700 text-4xl my-10">Crée ton compte</h1>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :email,
+          required: true,
+          autofocus: true,
+          input_html: { autocomplete: "email" } %>
+      <%= f.input :first_name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "given-name" }%>
+      <%= f.input :last_name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "family-name" }%>
+      <%= f.input :password,
+                  required: true,
+                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  required: true,
+                  input_html: { autocomplete: "new-password" } %>
+     <!-- Champs pour le chien -->
+    <%= f.simple_fields_for :dog, resource.build_dog do |dog_form| %>
+      <%= dog_form.input :name, required: true, label: "Nom du chien" %>
+    <% end %>
   </div>
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-<%= render "users/shared/links" %>
+    </div>
+
+    <div class="form-actions flex justify-center my-4">
+      <%= f.button :submit, "Sign up", class:"btn btn-success" %>
+    </div>
+  <% end %>
+
+  <div class="flex gap-4">
+    <%= render "users/shared/links" %>
+   </div>
+
+</section>

@@ -1,20 +1,29 @@
-<h2>Log in</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+<section class="flex flex-col items-center justify-center">
+  <div class="text-center">
+    <h1 class="text-center text-amber-700 text-4xl my-10">Dog Harmonie Balades</h1>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+  <div>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :email,
+                    required: false,
+                    autofocus: true,
+                    input_html: { autocomplete: "email" } %>
+        <%= f.input :password,
+                    required: false,
+                    input_html: { autocomplete: "current-password" } %>
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
 
-<%= render "users/shared/links" %>
+      <div class="form-actions flex justify-center my-4">
+        <%= f.button :submit, "Log in", class:"btn btn-success" %>
+      </div>
+    <% end %>
+
+    <div class="flex gap-4">
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+</section>
+

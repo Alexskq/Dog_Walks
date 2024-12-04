@@ -6,7 +6,7 @@ export default class extends Controller {
     // console.log("connected", this.element);gst
     flatpickr(".datepicker", {
       enableTime: true,
-      dateFormat: "d-m-Y",
+      dateFormat: "d-m-Y H:i",
       minDate: "today",
       locale: {
         firstDayOfWeek: 1,

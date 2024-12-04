@@ -1,11 +1,12 @@
 <h1>Liste des balades</h1>
 
 <% @walks.each do |walk| %>
-  <%= walk.name %>
-  <%= walk.description %>
-  <%= walk.date %>
-  <%# Ajouter format de date %>
-  <%= walk.time %>
-  <%= walk.location %>
-  <%= walk.number_of_dog %>
+  <div class="card-body">
+    <h2 class="card-title"><%= walk.name %></h2>
+    <p><%= walk.description %></p>
+    <span><%= l walk.date, format: :short %></span>
+    <span><%= walk.location %></span>
+    <span><%= walk.number_of_dog %> chien(s) maximum</span>
+    <%= link_to "S'inscrire", walks_path, class: 'btn btn-primary' %>
+  </div>
 <% end %>

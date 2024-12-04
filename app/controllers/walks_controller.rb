@@ -25,6 +25,6 @@ class WalksController < ApplicationController
   def walk_params
     params
       .require(:walk)
-      .permit(:name, :location, :number_of_dog, :description, :date, :time)
+      .permit(:name, :location, :number_of_dog, :description, :date)
   end
 end

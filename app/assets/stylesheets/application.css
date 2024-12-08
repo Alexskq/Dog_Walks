@@ -9,3 +9,5 @@
  * Consider organizing styles into separate files for maintainability.
  *= require flatpickr/dist/flatpickr.min.css
  */
+
+@import "background";

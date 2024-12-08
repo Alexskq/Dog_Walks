@@ -1,0 +1,27 @@
+.mesh-gradient-brown {
+  background-color: rgb(116, 71, 64);
+  background-image: radial-gradient(
+      at 23% 87%,
+      rgb(15, 23, 42) 0,
+      transparent 73%
+    ),
+    radial-gradient(at 60% 62%, rgb(30, 41, 59) 0, transparent 96%),
+    radial-gradient(at 79% 10%, rgb(30, 41, 59) 0, transparent 78%),
+    radial-gradient(at 24% 8%, rgb(12, 74, 110) 0, transparent 100%),
+    radial-gradient(at 21% 23%, rgb(15, 23, 42) 0, transparent 42%),
+    radial-gradient(at 32% 41%, rgb(15, 23, 42) 0, transparent 46%);
+}
+
+.mesh-gradient-custom {
+  background-color: rgb(155, 108, 86);
+  background-image: radial-gradient(
+      at 23% 87%,
+      rgb(97, 57, 46) 0,
+      transparent 73%
+    ),
+    radial-gradient(at 60% 62%, rgb(135, 80, 64) 0, transparent 96%),
+    radial-gradient(at 79% 10%, rgb(116, 71, 64) 0, transparent 78%),
+    radial-gradient(at 24% 8%, rgb(175, 128, 106) 0, transparent 100%),
+    radial-gradient(at 21% 23%, rgb(135, 88, 74) 0, transparent 42%),
+    radial-gradient(at 32% 41%, rgb(116, 71, 64) 0, transparent 46%);
+}

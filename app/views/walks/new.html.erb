@@ -2,54 +2,6 @@
   <h1 class="text-4xl text-amber-700 font-bold mx-auto">Créer une balade</h1>
 
   <div class="flex flex-col items-center justify-center mx-auto">
-    <%= simple_form_for @walk, html: { class: "flex flex-col items-center gap-12" }, data: { controller: "flatpickr"} do |f| %>
-      <%=
-        f.input :name,
-                label: 'Titre de la balade',
-                input_html: {
-                  placeholder: 'Ex: Balade en forêt de Raismes',
-                },
-                class: 'py-2'
-      %>
-      <%=
-        f.input :description,
-                label: 'Description de la balade',
-                input_html: {
-                  placeholder: "Ex: Bol d'air frais",
-                }
-      %>
-      <%=
-        f.input :date,
-                as: :string,
-                input_html: {
-                  class: 'datepicker',
-                },
-                label: 'Date et heure de la balade',
-                required: true
-      %>
-
-      <!--
-      <%=
-  f.input :time,
-          as: :string,
-          label: 'Heure de la balade',
-          input_html: {
-            class: 'timepicker',
-          }
-%>
-      -->
-      <%= f.input :location, label: 'Lieu de la balade' %>
-      <%=
-        f.input :number_of_dog,
-                label: 'Nombre de chiens maximum',
-                input_html: {
-                  min: 1,
-                  max: 6,
-                  type: 'number',
-                  placeholder: 'Ex : 5',
-                }
-      %>
-      <%= f.button :submit, 'Créer la balade', class: 'btn btn-primary' %>
-    <% end %>
+    <%= render 'walks/form', walk: @walk %>
   </div>
 </main>

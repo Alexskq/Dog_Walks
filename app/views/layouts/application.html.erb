@@ -39,7 +39,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="mesh-gradient-custom h-screen">
+    <%= render 'shared/navbar' %>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>

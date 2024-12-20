@@ -1,4 +1,4 @@
-# Boilerplate Rails 8
+# Dog Walks
 
 - Rails 8
 - Devise

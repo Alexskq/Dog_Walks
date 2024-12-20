@@ -1,4 +1,4 @@
-# Dog Walks
+# 🐕 Dog Walks
 
 - Rails 8
 - Devise

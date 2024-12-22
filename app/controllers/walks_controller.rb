@@ -14,7 +14,7 @@ class WalksController < ApplicationController
   def create
     @walk = Walk.new(walk_params)
     if @walk.save
-      redirect_to walks_path, notice: 'Balade créee avec succès'
+      redirect_to walks_path, notice: "Balade créee avec succès"
     else
       render :new, status: :unprocessable_entity
     end

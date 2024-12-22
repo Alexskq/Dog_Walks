@@ -6,6 +6,7 @@ module.exports = {
     "./app/helpers/**/*.rb",
     "./app/javascript/**/*.js",
     "./app/views/**/*.{erb,haml,html,slim}",
+    "./config/initializers/*.rb",
   ],
   theme: {
     extend: {
@@ -21,4 +22,7 @@ module.exports = {
     require("@tailwindcss/container-queries"),
     require("daisyui"),
   ],
+  daisyui: {
+    themes: ["coffee", "halloween"],
+  },
 };

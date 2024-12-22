@@ -5,7 +5,7 @@ Rails
     devise_for :users,
                controllers: {
                  registrations: 'users/registrations', # rubocop:disable Style/StringLiterals
-                 sessions: 'users/sessions', # rubocop:disable Style/StringLiterals
+                 sessions: 'users/sessions' # rubocop:disable Style/StringLiterals
                }
 
     resources :walks do

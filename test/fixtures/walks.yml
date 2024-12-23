@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  location: MyString
-  number_of_dog: 1
+  name: Foret de Soignes 1
+  description: Cool balade en foret
+  location: Soignes
+  number_of_dog: 2
 
 two:
-  name: MyString
-  location: MyString
-  number_of_dog: 1
+  name: Parc de la Woluwe 2
+  description: Balade en ville
+  location: Woluwe
+  number_of_dog: 3

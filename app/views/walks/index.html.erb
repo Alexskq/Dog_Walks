@@ -4,7 +4,7 @@
   <div class="card-body">
     <h2 class="card-title"><%= walk.name %></h2>
     <p><%= walk.description %></p>
-    <span><%= l walk.date, format: :short %></span>
+    <span><%= walk.date != nil ? l(walk.date, format: :short, locale: :fr) : 'Non défini' %></span>
     <span><%= walk.location %></span>
     <span><%= walk.number_of_dog %> chien(s) maximum</span>
     <%=

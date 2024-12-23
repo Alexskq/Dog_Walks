@@ -22,6 +22,9 @@
   "tailwindCSS.experimental.classRegex": [
     "\\bclass:\\s*'([^']*)'",
     "\\bclass:\\s*\"([^\"]*)\""
-  ]
-  // ******************************
+  ],
+  "ruby.lint": {
+    "rubocop": true,
+    "erb_lint": true // Ajoutez cette ligne pour activer erb_lint
+  }
 }

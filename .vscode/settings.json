@@ -14,8 +14,12 @@
     "editor.semanticHighlighting.enabled": true, // Enable semantic highlighting
     "editor.formatOnType": true // Enable formatting while typing
   },
+  // "[erb]": {
+  //   "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+  // },
   "[erb]": {
-    "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+    "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+    "editor.formatOnSave": true
   },
 
   // Tailwind CSS IntelliSense in <%= %> tags

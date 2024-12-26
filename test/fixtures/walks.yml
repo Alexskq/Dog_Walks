@@ -3,11 +3,13 @@
 one:
   name: Foret de Soignes 1
   description: Cool balade en foret
+  date: 25-12-2024 à 14h
   location: Soignes
   number_of_dog: 2
 
 two:
   name: Parc de la Woluwe 2
   description: Balade en ville
+  date: 26-12-2024 à 16h
   location: Woluwe
   number_of_dog: 3

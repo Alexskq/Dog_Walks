@@ -1,7 +1,5 @@
 <div>
-  <h1>Inscription à la balade : <%= @walk.name %></h1>
-
-  <%= simple_form_for [@walk, @user_walk], local: true do |form| %>
+  <%= simple_form_for [walk, @user_walk], local: true do |form| %>
     <% if @user_walk.errors.any? %>
       <div id="error_explanation">
         <h2>
@@ -17,17 +15,19 @@
       </div>
     <% end %>
 
-    <% if @walk.user_walks.count < @walk.number_of_dog %>
-      <p>
-        Places disponibles : <%= @walk.number_of_dog - @walk.user_walks.count %>
+    <% if walk.user_walks.count < walk.number_of_dog %>
+      <p class="mt-4">
+        Places disponibles : <%= walk.number_of_dog - walk.user_walks.count %>
       </p>
-      <%= form.submit "Confirmer l'inscription", class:"btn btn-primary" %>
+      <div class="flex justify-center gap-4 mt-4">
+        <%= form.submit "Confirmer", class:"btn btn-primary" %>
+        <%= link_to "Retour", walks_path, class:"btn btn-secondary" %>
+
+      </div>
+
     <% else %>
       <p>Cette balade est complète.</p>
     <% end %>
   <% end %>
 
-  <%= link_to 'Retour à la balade', @walk, class: "btn btn-secondary"
-  
- %>
 </div>

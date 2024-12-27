@@ -50,7 +50,7 @@ SimpleForm.setup do |config|
     b.use :label, class: "block", error_class: "text-red-500"
     b.use :input,
           class:
-            "shadow appearance-none rounded w-full py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-400 leading-6 transition-colors duration-200 ease-in-out placeholder-slate-200",
+            "shadow appearance-none rounded w-full py-2 px-3 bg-white border border-gray-300/50 focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-400 leading-6 transition-colors duration-200 ease-in-out placeholder-gray-300/50",
           error_class: "border-red-500",
           valid_class: "border-green-400"
     b.use :full_error,

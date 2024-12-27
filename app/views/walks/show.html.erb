@@ -1,7 +1,7 @@
 <h1><%= @walk.name %></h1>
 <p>Lieu : <%= @walk.location %></p>
 <p>Date : <%= @walk.date %></p>
-<p>Nombre de places : <%= @walk.number_of_dog %></p>
+<p>Nombre de places max: <%= @walk.number_of_dog %></p>
 
 <% if user_signed_in? %>
   <% if @walk.user_walks.where(user: current_user).exists? %>

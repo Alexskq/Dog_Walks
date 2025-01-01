@@ -1,4 +1,4 @@
-  <%= turbo_frame_tag :walk_details do %>
+<%= turbo_frame_tag :walk_details do %>
 
   <%= simple_form_for [walk, @user_walk], local: true do |form| %>
     <% if @user_walk.errors.any? %>
@@ -20,14 +20,12 @@
       <p class="mt-4">
         Places disponibles : <%= walk.number_of_dog - walk.user_walks.count %>
       </p>
-      <div class="flex justify-center gap-4 mt-4">
+      <div class="flex justify-center items-center gap-4 mt-4">
         <%= form.submit "Confirmer", class:"btn btn-primary" %>
-        <%= link_to "Retour", walks_path, class:"btn btn-secondary" %>
-      </div>
-
-    <% else %>
-      <p>Cette balade est complète.</p>
+      <% else %>
+        <p>Cette balade est complète.</p>
+      <% end %>
     <% end %>
-  <% end %>
-
+    <button onclick="this.closest('dialog').close()" class="btn btn-secondary">Retour</button>
+  </div>
 <% end %>

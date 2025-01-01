@@ -18,12 +18,11 @@
     %>
     <% else %>
       <% if @walk.user_walks.count < @walk.number_of_dog %>
-        <%=
-        button_to 'S\'inscrire',
-                  walk_user_walks_path(@walk),
-                  method: :post,
-                  class: 'btn btn-primary'
-      %>
+        <%= link_to 'S\'inscrire',
+                    walk_user_walks_path(@walk),
+                    data: { turbo_method: :post, turbo_frame: :walk_details },
+                    class: 'btn btn-primary'
+        %>
       <% else %>
         <p>Cette balade est complète</p>
       <% end %>

@@ -20,7 +20,7 @@ class UserWalksController < ApplicationController
     if @user_walk.save
       redirect_to @walk, notice: 'Vous êtes inscrit à cette balade.'
     else
-      render :new
+      render @walk, status: :unprocessable_entity
     end
   end
 

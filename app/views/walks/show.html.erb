@@ -17,9 +17,10 @@
   <% else %>
     <% if @walk.user_walks.count < @walk.number_of_dog %>
       <%=
-        link_to 'S\'inscrire',
-                new_walk_user_walk_path(@walk),
-                class: 'btn btn-primary'
+        button_to 'S\'inscrire',
+                  walk_user_walks_path(@walk),
+                  method: :post,
+                  class: 'btn btn-primary'
       %>
     <% else %>
       <p>Cette balade est complète</p>

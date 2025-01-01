@@ -1,33 +1,29 @@
-<div>
   <%= simple_form_for [walk, @user_walk], local: true do |form| %>
-    <% if @user_walk.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@user_walk.errors.count, 'erreur') %> empêche(nt) cette
-          inscription :
-        </h2>
+  <% if @user_walk.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@user_walk.errors.count, 'erreur') %> empêche(nt) cette
+        inscription :
+      </h2>
 
-        <ul>
-          <% @user_walk.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <% if walk.user_walks.count < walk.number_of_dog %>
-      <p class="mt-4">
-        Places disponibles : <%= walk.number_of_dog - walk.user_walks.count %>
-      </p>
-      <div class="flex justify-center gap-4 mt-4">
-        <%= form.submit "Confirmer", class:"btn btn-primary" %>
-        <%= link_to "Retour", walks_path, class:"btn btn-secondary" %>
-
-      </div>
-
-    <% else %>
-      <p>Cette balade est complète.</p>
-    <% end %>
+      <ul>
+        <% @user_walk.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-</div>
+  <% if walk.user_walks.count < walk.number_of_dog %>
+    <p class="mt-4">
+      Places disponibles : <%= walk.number_of_dog - walk.user_walks.count %>
+    </p>
+    <div class="flex justify-center gap-4 mt-4">
+      <%= form.submit "Confirmer", class:"btn btn-primary" %>
+      <%= link_to "Retour", walks_path, class:"btn btn-secondary" %>
+    </div>
+
+  <% else %>
+    <p>Cette balade est complète.</p>
+  <% end %>
+<% end %>

@@ -1,11 +1,13 @@
-<h1><%= @walk.name %></h1>
-<p>Lieu : <%= @walk.location %></p>
-<p>Date : <%= @walk.date %></p>
-<p>Nombre de places max: <%= @walk.number_of_dog %></p>
+<%= turbo_frame_tag :walk_details do %>
 
-<% if user_signed_in? %>
-  <% if @walk.user_walks.where(user: current_user).exists? %>
-    <%=
+  <h1><%= @walk.name %></h1>
+  <p>Lieu : <%= @walk.location %></p>
+  <p>Date : <%= @walk.date %></p>
+  <p>Nombre de places max: <%= @walk.number_of_dog %></p>
+
+  <% if user_signed_in? %>
+    <% if @walk.user_walks.where(user: current_user).exists? %>
+      <%=
       button_to 'Se désinscrire',
                 walk_user_walk_path(
                   @walk,
@@ -14,20 +16,22 @@
                 method: :delete,
                 class: 'btn btn-danger'
     %>
-  <% else %>
-    <% if @walk.user_walks.count < @walk.number_of_dog %>
-      <%=
-        link_to 'S\'inscrire',
-                new_walk_user_walk_path(@walk),
-                class: 'btn btn-primary'
-      %>
     <% else %>
-      <p>Cette balade est complète</p>
+      <% if @walk.user_walks.count < @walk.number_of_dog %>
+        <%= link_to 'S\'inscrire',
+                    walk_user_walks_path(@walk),
+                    data: { turbo_method: :post, turbo_frame: :walk_details },
+                    class: 'btn btn-primary'
+        %>
+      <% else %>
+        <p>Cette balade est complète</p>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
 
-<h2>Participants (<%= @walk.user_walks.count %>/<%= @walk.number_of_dog %>)</h2>
-<% @walk.user_walks.each do |user_walk| %>
-  <p><%= user_walk.user.first_name %> <%= user_walk.user.last_name %></p>
+  <h2>Participants (<%= @walk.user_walks.count %>/<%= @walk.number_of_dog %>)</h2>
+  <% @walk.user_walks.each do |user_walk| %>
+    <p><%= user_walk.user.first_name %> <%= user_walk.user.last_name %></p>
+  <% end %>
+
 <% end %>

@@ -17,11 +17,11 @@ class UserWalksController < ApplicationController
 
     @user_walk = current_user.user_walks.build(walk: @walk)
 
-    if @user_walk.save
-      redirect_to @walk, notice: 'Vous êtes inscrit à cette balade.'
-    else
-      render :new
-    end
+    @user_walk.save
+    redirect_to @walk, notice: 'Vous êtes inscrit à cette balade.'
+    # else
+    #   render @walk, status: :unprocessable_entity
+    # end
   end
 
   def destroy

@@ -1,4 +1,4 @@
-<%= turbo_frame_tag :walk_details do %>
+<%= turbo_frame_tag "walk_details_#{@walk.id}" do %>
 
   <h1><%= @walk.name %></h1>
   <p>Lieu : <%= @walk.location %></p>
@@ -20,7 +20,7 @@
       <% if @walk.user_walks.count < @walk.number_of_dog %>
         <%= link_to 'S\'inscrire',
                     walk_user_walks_path(@walk),
-                    data: { turbo_method: :post, turbo_frame: :walk_details },
+                    data: { turbo_method: :post, turbo_frame: "walk_details_#{@walk.id}" },
                     class: 'btn btn-primary'
         %>
       <% else %>

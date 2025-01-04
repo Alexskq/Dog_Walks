@@ -6,12 +6,12 @@
 #
 one:
   email: alex@mail.com
-  first_name: alex
+  first_name: Alex
   last_name: Zoonekynd
   encrypted_password: <%= Devise::Encryptor.digest(User, 'coucou') %>
 
 two:
   email: anais2@mail.com
-  first_name: anais
+  first_name: Anaïs
   last_name: carlier
   encrypted_password: <%= Devise::Encryptor.digest(User, 'coucou') %>

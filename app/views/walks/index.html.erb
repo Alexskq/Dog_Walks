@@ -17,7 +17,8 @@
         <form method="dialog">
           <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
-        <h3 class="text-lg font-bold"> Balade : <%= walk.name %></h3>
+        <h3 class="text-lg font-bold text-center mb-2"> Balade : <%= walk.name %></h3>
+        <hr class="border border-[#c59f60] w-[60%] mx-auto m-2">
         <%= render 'user_walks/form', walk: walk, user_walk: @user_walk %>
       </div>
     </dialog>

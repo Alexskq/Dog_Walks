@@ -1,6 +1,5 @@
-<%= turbo_frame_tag :walk_details do %>
-
-  <%= simple_form_for [walk, @user_walk], local: true do |form| %>
+<%= turbo_frame_tag "walk_details_#{walk.id}" do %>
+  <%= form_with(model: [walk, user_walk], data: { turbo_frame: "walk_details_#{walk.id}" }) do |f| %>
     <% if @user_walk.errors.any? %>
       <div id="error_explanation">
         <h2>
@@ -21,7 +20,7 @@
         Places disponibles : <%= walk.number_of_dog - walk.user_walks.count %>
       </p>
       <div class="flex justify-center items-center gap-4 mt-4">
-        <%= form.submit "Confirmer", class:"btn btn-primary" %>
+        <%= f.submit "Confirmer", class: "btn btn-primary" %>
       <% else %>
         <p>Cette balade est complète.</p>
       <% end %>

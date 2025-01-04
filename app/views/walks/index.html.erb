@@ -1,5 +1,11 @@
 <!-- app/views/walks/index.html.erb -->
 <h1 class="text-center text-3xl font-bold mt-4 tracking-wider">Liste des balades</h1>
+<% if user_signed_in? %>
+  <div class="flex justify-center items-center gap-4 mt-4">
+    <%= link_to 'Créer une balade', new_walk_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
 
 <% @walks.each do |walk| %>
   <div class="card-body border border-[#c59f60] rounded-lg m-4">

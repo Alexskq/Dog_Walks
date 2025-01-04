@@ -29,7 +29,8 @@
       <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       </form>
-      <h3 class="text-lg font-bold">Détails de la balade : <%= walk.name %></h3>
+      <h3 class="text-lg font-bold text-center"><%= walk.name %></h3>
+      <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
       <div class="mt-4">
         <%= turbo_frame_tag "walk_details_#{walk.id}" do %>
           <%= render partial: 'walks/show_details', locals: { walk: walk, user_walk: @user_walk } %>

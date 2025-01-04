@@ -1,35 +1,35 @@
-<%# <%= turbo_frame_tag :walk_details do %> %>
-  <div class="space-y-4">
-    <div>
-      <h4 class="font-semibold">Description :</h4>
-      <p><%= walk.description %></p>
-    </div>
-
-    <div>
-      <h4 class="font-semibold">Date :</h4>
-      <p><%= walk.date != nil ? l(walk.date, format: :long, locale: :fr) : 'Non définie' %></p>
-    </div>
-
-    <div>
-      <h4 class="font-semibold">Lieu :</h4>
-      <p><%= walk.location %></p>
-    </div>
-
-    <div>
-      <h4 class="font-semibold">Nombre maximum de chiens :</h4>
-      <p><%= walk.number_of_dog %></p>
-    </div>
-
-    <% if walk.user_walks.any? %>
-      <div>
-        <h4 class="font-semibold">Participants :</h4>
-        <ul class="list-disc list-inside">
-          <% walk.user_walks.each do |user_walk| %>
-            <li><%= user_walk.user.first_name %> - <%= walk.number_of_dog %> chien(s)</li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+<div class="space-y-4">
+  <div class=" flex">
+    <h4 class="font-semibold">Date :&nbsp;</h4>
+    <p><%= walk.date != nil ? l(walk.date, format: :short, locale: :fr) : 'Non définie' %></p>
   </div>
-  <p>coucou</p>
-  <%# <% end %> %>
+
+  <div class="flex">
+    <h4 class="font-semibold">Lieu :&nbsp;</h4>
+    <p><%= walk.location %></p>
+  </div>
+
+  <div>
+    <h4 class="font-semibold">Description :</h4>
+    <p><%= walk.description %></p>
+  </div>
+
+
+  <div>
+    <h4 class="font-semibold">Nombre de chiens max : <%= walk.number_of_dog %> 🐶</h4>
+  </div>
+
+  <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
+
+  <% if walk.user_walks.any? %>
+    <div>
+      <p class="text-center mb-2"><strong>Participants -</strong> (<%= walk.user_walks.count %>/<%= walk.number_of_dog %>)</p>
+
+      <ul class="list-disc list-inside">
+        <% walk.user_walks.each do |user_walk| %>
+          <li><%= user_walk.user.first_name %> - <%= user_walk.user.dog.name %> </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

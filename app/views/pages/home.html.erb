@@ -1,14 +1,41 @@
 <main class="flex flex-col items-center justify-center mx-auto gap-3">
-  <h1 class="text-5xl text-amber-700 font-bold mx-auto mt-12">Dog walks</h1>
+  <%# <h1 class="text-5xl text-amber-700 font-bold mx-auto mt-12">Dog walks</h1> %>
 
   <% if user_signed_in? %>
-    <p class="text-2xl text-amber-700 font-bold mx-auto mt-8">Hello <%= current_user.first_name %> <%= current_user.last_name %></p>
+    <h2 class="text-4xl text-amber-700 font-bold mx-auto mt-8">Hello <%= current_user.first_name %> </h2>
+    <p class="text-center ">Bienvenue sur <strong>Dog Walks</strong>, <br>
+      ici tu peux rejoindre une balade avec ton compagnon à 4 pattes ou créer ta propre balade </p>
   <% else %>
     <p class="text-2xl text-amber-700 font-bold mx-auto">Welcome to Dog walks</p>
   <% end %>
 
-  <div>
+  <div class="flex flex-col items-center justify-center gap-4 mt-4">
     <%= link_to "Créer une balade", new_walk_path, class:"btn btn-primary mt-4" %>
+    <%= link_to "Voir toutes les balades", walks_path, class:"btn btn-primary mt-4" %>
+  </div>
+
+  <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
+
+  <%# Les prochaines Balades proches %>
+  <div class="w-[80vw] mx-auto">
+    <h2 class="text-3xl font-semibold text-center">Prochaines balades</h2>
+    <ul>
+      <% @closest_walks.each do |walk| %>
+        <div class="card-body border border-[#c59f60] rounded-lg m-4">
+          <h2 class="card-title"><%= walk.name %></h2>
+          <p><%= walk.description %></p>
+          <span><%= walk.date != nil ? l(walk.date, format: :short, locale: :fr) : 'Non défini' %></span>
+          <span><%= walk.location %></span>
+          <span><%= walk.number_of_dog %> chien(s) max</span>
+          <!--
+          <button class="btn btn-primary" onclick="signup_modal_<%= walk.id %>.showModal()">S'inscrire</button>
+          <button class="btn btn-primary" onclick="details_modal_<%= walk.id %>.showModal()">Voir le details</button>
+          -->
+
+
+        </div>
+      <% end %>
+    </ul>
   </div>
 </main>
 

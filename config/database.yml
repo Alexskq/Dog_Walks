@@ -10,6 +10,7 @@ default: &default
   # Ajoutez ces lignes pour la configuration locale
   host: localhost
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  port: 5432
 
 development:
   <<: *default

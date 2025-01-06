@@ -7,10 +7,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # Ajoutez ces lignes pour la configuration locale
-  host: localhost
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  port: 5432
+  host: localhost
+  username: <%= ENV['USER'] %> # Utilisera votre nom d'utilisateur système
+  template: template0
 
 development:
   <<: *default

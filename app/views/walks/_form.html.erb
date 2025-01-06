@@ -1,11 +1,11 @@
-<%= simple_form_for walk, html: { class: "flex flex-col items-center gap-12" }, data: { controller: "flatpickr"} do |f| %>
+<%= simple_form_for walk, html: { class: 'flex flex-col items-center gap-12' }, data: { controller: 'flatpickr' } do |f| %>
   <%=
     f.input :name,
             label: 'Nom de la balade',
             label_html: { class: 'text-[#db924b]' },
             input_html: {
               placeholder: 'Ex: Balade en forêt de Raismes',
-              class:"!bg-transparent/20 mt-2"
+              class: '!bg-transparent/20 mt-2'
             },
             class: 'py-2 '
   %>
@@ -15,7 +15,7 @@
             label_html: { class: 'text-[#db924b]' },
             input_html: {
               placeholder: "Ex: Bol d'air frais",
-              class:"!bg-transparent/20 mt-2"
+              class: '!bg-transparent/20 mt-2'
             }
   %>
   <%=
@@ -44,7 +44,7 @@
               label: 'Lieu',
               label_html: { class: 'text-[#db924b]' },
               input_html: {
-                class:"!bg-transparent/20 mt-2",
+                class: '!bg-transparent/20 mt-2',
                 placeholder: 'Ex: Parc de la Rhônelle',
               } %>
   <%=
@@ -52,7 +52,7 @@
             label: 'Nombre de chiens maximum',
             label_html: { class: 'text-[#db924b]' },
             input_html: {
-              class:"!bg-transparent/20 mt-2",
+              class: '!bg-transparent/20 mt-2',
               min: 1,
               max: 6,
               type: 'number',

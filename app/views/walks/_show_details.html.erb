@@ -1,7 +1,7 @@
 <div class="space-y-4">
   <div class=" flex">
     <h4 class="font-semibold">Date :&nbsp;</h4>
-    <p><%= walk.date != nil ? l(walk.date, format: :short, locale: :fr) : 'Non définie' %></p>
+    <p><%= walk.date.nil? ? 'Non définie' : l(walk.date, format: :short, locale: :fr) %></p>
   </div>
 
   <div class="flex">

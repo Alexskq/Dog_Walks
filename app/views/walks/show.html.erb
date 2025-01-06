@@ -15,7 +15,7 @@
   </ul>
 
   <% if user_signed_in? %>
-    <% if @walk.user_walks.where(user: current_user).exists? %>
+    <% if @walk.user_walks.exists?(user: current_user) %>
       <%=
       button_to 'Se désinscrire',
                 walk_user_walk_path(

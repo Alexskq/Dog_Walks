@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
 
-  has_many :user_walks
+  has_many :user_walks, dependent: :destroy
   has_many :walks, through: :user_walks
-  has_many :dogs
+  has_many :dogs, dependent: :destroy
 end

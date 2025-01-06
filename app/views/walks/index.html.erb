@@ -11,7 +11,7 @@
   <div class="card-body border border-[#c59f60] rounded-lg m-4">
     <h2 class="card-title"><%= walk.name %></h2>
     <p><%= walk.description %></p>
-    <span><%= walk.date != nil ? l(walk.date, format: :short, locale: :fr) : 'Non défini' %></span>
+    <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
     <span><%= walk.location %></span>
     <span><%= walk.number_of_dog %> chien(s) maximum</span>
     <button class="btn btn-primary" onclick="signup_modal_<%= walk.id %>.showModal()">S'inscrire</button>

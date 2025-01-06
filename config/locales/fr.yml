@@ -36,3 +36,11 @@ fr:
       long: "%d %B %Y %H:%M"
     am: "am"
     pm: "pm"
+
+  message:
+    already_subscribe: "Vous êtes déjà inscrit à cette balade"
+    max_participants_reached: "Cette balade est complète. Vous ne pouvez plus vous inscrire"
+    subscribe_success: "Vous êtes inscrit à cette balade"
+    unsubscribe_success: "Vous êtes désinscrit de cette balade"
+    registration_forbidden: "Vous ne pouvez pas vous désinscrire à cette balade"
+    walk_created: "Balade créée avec succès"

@@ -39,10 +39,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="mesh-gradient-custom h-full pb-12">
+  <body class="mesh-gradient-custom h-full">
     <%= render 'shared/navbar' if params['action'] != 'new' %>
     <%# <main class="container mx-auto mt-28 px-5 flex"> %>
-    <main>
+    <main >
       <%= yield %>
     </main>
   </body>

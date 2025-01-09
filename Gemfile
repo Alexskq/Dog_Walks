@@ -30,6 +30,8 @@ gem 'pg'
 gem 'flatpickr'
 # i18n
 gem 'rails-i18n', '~> 8.0.0'
+# Font Awesome
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.8'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"

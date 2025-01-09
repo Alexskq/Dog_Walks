@@ -1,32 +1,49 @@
-<section style="height: 100vh">
-  <div class=" rounded-full h-28 p-4 border border-white m-4">
-    <%= image_tag "bird.png", alt: "photo de profil" %>
-  </div>
-
-  <%# info  %>
-  <div class="flex flex-col items-center">
-    <div class="m-4 flex flex-col items-center">
-      <h2 class="text-3xl font-semibold mb-4">Info personnel</h2>
-      <span><strong>Mail : </strong><%= current_user.email %></span>
-      <span><%= current_user.dog.name %></span>
+<%= turbo_frame_tag :profil do %>
+  <section style="height: 100vh">
+    <div class=" rounded-full p-4 border border-white m-4">
+      <%= image_tag "bird.png", alt: "photo de profil", class:"rounded-full" %>
     </div>
 
-    <%# les prochaines balades inscrit%>
-    <div class="!pb-16">
-      <h2 class="text-3xl font-semibold">Prochaines balades</h2>
-      <% current_user.walks.each do |walk| %>
-        <div class="m-4 flex flex-col items-center">
-          <%= walk.name %>
-          <%= walk.time %>
-          <%= walk.location %>
-        </div>
-      <% end %>
+    <%# info  %>
+    <div class="flex flex-col items-center">
+      <div class="m-4 flex flex-col items-center">
+        <h2 class="text-3xl font-semibold mb-4">Info personnel</h2>
+        <span><strong>Mail : </strong><%= current_user.email %></span>
+        <span><%= current_user.dog.name %></span>
+      </div>
 
-      <%# bouton de déconnexion %>
-      <div class="flex justify-center">
-        <%= link_to "Se déconnecter", destroy_user_session_path, class:"btn btn-primary m-4 flex mx-auto", data: { turbo_method: :delete }%>
+      <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
+
+      <%# les prochaines balades inscrit%>
+      <div class="!pb-16">
+        <h2 class="text-3xl font-semibold">Prochaines balades</h2>
+        <% current_user.walks.each do |walk| %>
+          <div class="m-4 flex flex-col items-center">
+            <div class="flex justify-center items-center">
+              <span><%= walk.name %> - </span>
+              <span> <%= l(walk.date, format: :short, locale: :fr) %></span>
+
+
+              <% if walk.user_walks.exists?(user: current_user) %>
+                <%=
+      button_to 'Se désinscrire',
+                destroy_user_walk_path(walk_id: walk.id),
+                data: { turbo_method: :delete, turbo_frame: "_top", turbo_confirm: "Voulez-vous vraiment vous désinscrire de cette balade ?" },
+                method: :delete,
+                class: 'btn btn-outline btn-primary m-4 flex mx-auto'
+    %>
+              <% end %>
+
+            </div>
+          </div>
+        <% end %>
+
+        <%# bouton de déconnexion %>
+        <div class="flex justify-center">
+          <%= link_to "Se déconnecter", destroy_user_session_path, class:"btn btn-primary m-4 flex mx-auto", data: { turbo_method: :delete }%>
+        </div>
       </div>
     </div>
-  </div>
 
-</section>
+  </section>
+<% end %>

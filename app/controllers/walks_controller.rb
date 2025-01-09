@@ -21,6 +21,13 @@ class WalksController < ApplicationController
     end
   end
 
+  def destroy
+    @walk = Walk.find(params[:id])
+    @walk.destroy
+    redirect_to profil_path, notice: I18n.t('walk_destroyed', locale: :fr)
+  end
+
+
   private
 
   def walk_params

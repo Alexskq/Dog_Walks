@@ -139,6 +139,8 @@ GEM
     ffi (1.17.1-x86_64-linux-gnu)
     ffi (1.17.1-x86_64-linux-musl)
     flatpickr (4.6.13.1)
+    font-awesome-rails (4.7.0.9)
+      railties (>= 3.2, < 9.0)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -200,6 +202,8 @@ GEM
       net-protocol
     net-ssh (7.3.0)
     nio4r (2.7.4)
+    nokogiri (1.17.2-x86_64-linux)
+      racc (~> 1.4)
     nokogiri (1.18.1-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.18.1-aarch64-linux-musl)
@@ -215,8 +219,6 @@ GEM
     nokogiri (1.18.1-x86_64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.18.1-x86_64-linux-musl)
-      racc (~> 1.4)
-    nokogiri (1.17.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
@@ -431,6 +433,7 @@ DEPENDENCIES
   devise (~> 4.9)
   erb_lint
   flatpickr
+  font-awesome-rails (~> 4.7, >= 4.7.0.8)
   htmlbeautifier
   importmap-rails
   kamal

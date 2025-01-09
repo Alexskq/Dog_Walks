@@ -11,7 +11,9 @@ Rails
     resources :walks do
       resources :user_walks, only: %i[new create destroy]
     end
-    root to: 'pages#home' # rubocop:disable Style/StringLiterals
+root to: 'pages#home' # rubocop:disable Style/StringLiterals
 
-    get '/profil', to: 'pages#profil' # rubocop:disable Style/StringLiterals
+get "/profil", to: "pages#profil", as: 'profil'
+delete "/destroy_user_walk", to: "pages#destroy_user_walk"
+ 
   end

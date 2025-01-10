@@ -1,35 +1,38 @@
-<div class="space-y-4">
-  <div class=" flex">
-    <h4 class="font-semibold">Date :&nbsp;</h4>
-    <p><%= walk.date.nil? ? 'Non définie' : l(walk.date, format: :short, locale: :fr) %></p>
-  </div>
-
-  <div class="flex">
-    <h4 class="font-semibold">Lieu :&nbsp;</h4>
-    <p><%= walk.location %></p>
-  </div>
-
-  <div>
-    <h4 class="font-semibold">Description :</h4>
-    <p><%= walk.description %></p>
-  </div>
-
-
-  <div>
-    <h4 class="font-semibold">Nombre de chiens max : <%= walk.number_of_dog %> 🐶</h4>
-  </div>
-
-  <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
-
-  <% if walk.user_walks.any? %>
-    <div>
-      <p class="text-center mb-2"><strong>Participants -</strong> (<%= walk.user_walks.count %>/<%= walk.number_of_dog %>)</p>
-
-      <ul class="list-disc list-inside">
-        <% walk.user_walks.each do |user_walk| %>
-          <li><%= user_walk.user.first_name %> - <%= user_walk.user.dog.name %> </li>
-        <% end %>
-      </ul>
+<%= turbo_frame_tag "walk_details_#{walk.id}" do %>
+  coucou
+  <div class="space-y-4">
+    <div class=" flex">
+      <h4 class="font-semibold">Date :&nbsp;</h4>
+      <p><%= walk.date.nil? ? 'Non définie' : l(walk.date, format: :short, locale: :fr) %></p>
     </div>
-  <% end %>
-</div>
+
+    <div class="flex">
+      <h4 class="font-semibold">Lieu :&nbsp;</h4>
+      <p><%= walk.location %></p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Description :</h4>
+      <p><%= walk.description %></p>
+    </div>
+
+
+    <div>
+      <h4 class="font-semibold">Nombre de chiens max : <%= walk.number_of_dog %> 🐶</h4>
+    </div>
+
+    <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
+
+    <% if walk.user_walks.any? %>
+      <div>
+        <p class="text-center mb-2"><strong>Participants -</strong> (<%= walk.user_walks.count %>/<%= walk.number_of_dog %>)</p>
+
+        <ul class="list-disc list-inside">
+          <% walk.user_walks.each do |user_walk| %>
+            <li><%= user_walk.user.first_name %> - <%= user_walk.user.dog.name %> </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+<% end %>

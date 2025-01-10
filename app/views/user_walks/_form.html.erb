@@ -15,6 +15,8 @@
       </div>
     <% end %>
 
+    <%# ? Contenu afficher %>
+
     <% if walk.user_walks.count < walk.number_of_dog %>
       <p class="mt-4">
         Places disponibles : <%= walk.number_of_dog - walk.user_walks.count %>
@@ -25,6 +27,7 @@
         <p>Cette balade est complète.</p>
       <% end %>
     <% end %>
+
     <button onclick="this.closest('dialog').close()" class="btn btn-secondary">Retour</button>
   </div>
 <% end %>

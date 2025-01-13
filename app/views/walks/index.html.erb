@@ -1,5 +1,20 @@
 <!-- app/views/walks/index.html.erb -->
 <h1 class="text-center text-3xl font-bold mt-4 tracking-wider">Liste des balades</h1>
+
+<%# Search Form %>
+<%= simple_form_for :search, url: walks_path, method: :get, html: { class: 'flex justify-center items-center gap-4 mt-4' } do |f| %>
+  <%= f.input :query, 
+      label: false,
+      input_html: { 
+        value: params[:query],
+        class: 'form-input',
+        placeholder: 'Lieu, nom de la balade...'
+      } 
+  %>
+  <%= f.button :submit, 'Rechercher', class: 'btn btn-primary' %>
+<% end %>
+
+
 <% if user_signed_in? %>
   <div class="flex justify-center items-center gap-4 mt-4">
     <%= link_to 'Créer une balade', new_walk_path, class: 'btn btn-primary' %>

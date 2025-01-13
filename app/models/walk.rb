@@ -7,4 +7,11 @@ class Walk < ApplicationRecord
     greater_than_or_equal_to: 1,
     less_than_or_equal_to: 6
   }
+
+  include PgSearch::Model
+  pg_search_scope :search_by_walk_name,
+  against: [ :name, :location, :date ],
+  using: {
+    tsearch: { prefix: true } # <-- now `superman batm` will return something!
+  }
 end

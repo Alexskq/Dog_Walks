@@ -11,7 +11,7 @@
 
   <div class="flex flex-col items-center justify-center gap-4 mt-4">
     <%= link_to 'Créer une balade', new_walk_path, class: 'btn btn-primary mt-4' %>
-    <%= link_to 'Voir toutes les balades', walks_path, class: 'btn btn-primary mt-4' %>
+    <%= link_to 'Voir toutes les balades', walks_path, class: 'btn btn-accent mt-4' %>
   </div>
 
   <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
@@ -21,14 +21,33 @@
     <h2 class="text-3xl font-semibold text-center">Prochaines balades</h2>
 
     <% @closest_walks.each do |walk| %>
-      <div class="card-body border border-[#c59f60] rounded-lg m-4">
-        <h2 class="card-title"><%= walk.name %></h2>
-        <p><%= walk.description %></p>
-        <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
-        <span><%= walk.location %></span>
-        <span><%= walk.number_of_dog %> chien(s) max</span>
-        <div class=" justify-end card-actions" onclick="signup_modal_<%= walk.id %>.showModal()">
-          <span class="font-bold text-3xl text-black bg-primary rounded-full h-10 w-10 text-center pr-[0.1rem]">+</span>
+      <div class="card border border-[#c59f60] w-96 shadow-xl rounded-lg">
+        <figure>
+          <img class="rounded-lg"
+          src="https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Shoes" />
+        </figure>
+        <div class="card-body rounded-lg">
+          <h2 class="card-title self-center mx-auto"><%= walk.name %></h2>
+          <div class="flex gap-2 items-center mt-4">
+            <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>
+            <p><%= walk.description %></p>
+          </div>
+          <div class="flex items-center  gap-2">
+            <%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "date", height: 20  %>
+            <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <%= image_tag "https://img.icons8.com/?size=20&id=13778&format=png&color=000000", alt: "location" %>
+            <span><%= walk.location %></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <%= image_tag "https://img.icons8.com/?size=20&id=9201&format=png&color=db924b", alt: "number of dog" %>
+            <span><%= walk.number_of_dog %> chien(s) max</span>
+          </div>
+          <div class=" justify-end card-actions" onclick="signup_modal_<%= walk.id %>.showModal()">
+            <span class="font-bold text-3xl text-black bg-primary rounded-full h-10 w-10 text-center pr-[0.1rem]">+</span>
+          </div>
         </div>
 
         <%# modal d'inscription %>

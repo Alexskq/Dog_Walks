@@ -30,7 +30,7 @@
     <span><%= walk.location %></span>
     <span><%= walk.number_of_dog %> chien(s) maximum</span>
     <button class="btn btn-primary" onclick="signup_modal_<%= walk.id %>.showModal()">S'inscrire</button>
-    <button class="btn btn-primary" onclick="details_modal_<%= walk.id %>.showModal()">Voir le details</button>
+    <button class="btn btn-active btn-default" onclick="details_modal_<%= walk.id %>.showModal()">Voir le details</button>
 
     <%# 1ere modal s'inscrire %>
     <dialog id="signup_modal_<%= walk.id %>" class="modal" >

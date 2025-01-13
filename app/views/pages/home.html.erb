@@ -19,24 +19,39 @@
   <%# Les prochaines Balades proches %>
   <div class="w-[80vw] mx-auto">
     <h2 class="text-3xl font-semibold text-center">Prochaines balades</h2>
-    <ul>
-      <% @closest_walks.each do |walk| %>
-        <div class="card-body border border-[#c59f60] rounded-lg m-4">
-          <h2 class="card-title"><%= walk.name %></h2>
-          <p><%= walk.description %></p>
-          <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
-          <span><%= walk.location %></span>
-          <span><%= walk.number_of_dog %> chien(s) max</span>
-          <!--
-          <button class="btn btn-primary" onclick="signup_modal_<%= walk.id %>.showModal()">S'inscrire</button>
+
+    <% @closest_walks.each do |walk| %>
+      <div class="card-body border border-[#c59f60] rounded-lg m-4">
+        <h2 class="card-title"><%= walk.name %></h2>
+        <p><%= walk.description %></p>
+        <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
+        <span><%= walk.location %></span>
+        <span><%= walk.number_of_dog %> chien(s) max</span>
+        <div class=" justify-end card-actions" onclick="signup_modal_<%= walk.id %>.showModal()">
+          <span class="font-bold text-3xl text-black bg-primary rounded-full h-10 w-10 text-center pr-[0.1rem]">+</span>
+        </div>
+
+        <%# modal d'inscription %>
+        <dialog id="signup_modal_<%= walk.id %>" class="modal" >
+          <div class="modal-box">
+            <form method="dialog">
+              <button
+            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" data-action="click->modal#close">✕</button>
+            </form>
+            <h3 class="text-lg font-bold text-center mb-2"> Balade : <%= walk.name %></h3>
+            <hr class="border border-[c] w-[60%] mx-auto m-2">
+            <%= render 'user_walks/form', walk: walk, user_walk: @user_walk %>
+          </div>
+        </dialog>
+      </div>
+
+      <!--
           <button class="btn btn-primary" onclick="details_modal_<%= walk.id %>.showModal()">Voir le details</button>
           -->
-
-
-        </div>
-      <% end %>
-    </ul>
+    <% end %>
   </div>
+
+</div>
 </main>
 
 

@@ -4,6 +4,7 @@ module.exports = {
   content: [
     "./public/*.html",
     "./app/helpers/**/*.rb",
+    "./app/assets/**/*.rb",
     "./app/javascript/**/*.js",
     "./app/views/**/*.{erb,haml,html,slim}",
     "./config/initializers/*.rb",
@@ -24,5 +25,8 @@ module.exports = {
   ],
   daisyui: {
     themes: ["coffee", "halloween"],
+  },
+  watchOptions: {
+    ignored: ["**/node_modules/**"],
   },
 };

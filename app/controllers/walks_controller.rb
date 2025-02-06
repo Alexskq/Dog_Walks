@@ -1,10 +1,10 @@
 class WalksController < ApplicationController
   def index
-    if params[:search] && params[:search][:query].present?
-      @walks = Walk.search_by_walk_name(params[:search][:query])
-    else
-      @walks = Walk.all
-    end
+    @walks = if params[:search] && params[:search][:query].present?
+               Walk.search_by_walk_name(params[:search][:query])
+             else
+               Walk.all
+             end
     @user_walk = UserWalk.new
   end
 

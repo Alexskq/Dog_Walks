@@ -8,3 +8,4 @@ If you are a dog educator and you have a community, this app is made for you to 
 - Devise
 - Tailwind
 - DaisyUI
+- S3

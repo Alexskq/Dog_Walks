@@ -11,12 +11,12 @@ class Walk < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_by_walk_name,
-  against: [ :name, :location, :date ],
-  associated_against: {
-    users: [ :first_name, :last_name ],
-    dogs: [ :name ]
-  },
-  using: {
-    tsearch: { prefix: true } # <-- now `superman batm` will return something!
-  }
+                  against: %i[name location date],
+                  associated_against: {
+                    users: %i[first_name last_name],
+                    dogs: [:name]
+                  },
+                  using: {
+                    tsearch: { prefix: true } # <-- now `superman batm` will return something!
+                  }
 end

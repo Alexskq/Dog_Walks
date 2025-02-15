@@ -22,8 +22,7 @@ gem 'devise', '~> 4.9'
 gem 'simple_form-tailwind'
 # Simple Form
 gem 'simple_form'
-# Tailwind CSS
-gem 'tailwindcss-rails', '~> 3.0'
+
 # Database : Postgres
 gem 'pg'
 # Flatpickr
@@ -84,3 +83,5 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
 end
+
+gem "tailwindcss-rails", "~> 3.2"

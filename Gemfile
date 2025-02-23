@@ -33,6 +33,8 @@ gem 'rails-i18n', '~> 8.0.0'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.8'
 # PG Search
 gem 'pg_search'
+# Geocoder
+gem 'geocoder'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
@@ -84,4 +86,4 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem "tailwindcss-rails", "~> 3.2"
+gem 'tailwindcss-rails', '~> 3.2'

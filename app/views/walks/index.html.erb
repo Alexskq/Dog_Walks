@@ -21,13 +21,19 @@
   </div>
 <% end %>
 
+<div style="width: 90%; height: 200px; border-radius:1rem"
+            data-controller="map"
+            data-map-markers-value="<%= @markers.to_json %>"
+            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+
 
 <% @walks.each do |walk| %>
   <div class="card-body border border-[#c59f60] rounded-lg m-4" data-controller="modal">
     <h2 class="card-title"><%= walk.name %></h2>
     <p><%= walk.description %></p>
     <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
-    <span><%= walk.location %></span>
+    <span><%= walk.address %></span>
     <span><%= walk.number_of_dog %> chien(s) maximum</span>
     <button class="btn btn-primary" onclick="signup_modal_<%= walk.id %>.showModal()">S'inscrire</button>
     <button class="btn btn-active btn-default" onclick="details_modal_<%= walk.id %>.showModal()">Voir le details</button>

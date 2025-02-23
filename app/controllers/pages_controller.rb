@@ -3,6 +3,14 @@ class PagesController < ApplicationController
     # les 3 dernieres walks créees
     @closest_walks = Walk.order('created_at DESC').limit(3)
     @user_walk = current_user.user_walks.build(walk: @walk)
+    @walks = Walk.all
+
+    @markers = @walks.geocoded.map do |walk|
+      {
+        lat: walk.latitude,
+        lng: walk.longitude
+      }
+    end
   end
 
   def profil

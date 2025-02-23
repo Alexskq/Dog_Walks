@@ -6,6 +6,13 @@ class WalksController < ApplicationController
                Walk.all
              end
     @user_walk = UserWalk.new
+
+    @markers = @walks.geocoded.map do |walk|
+      {
+        lat: walk.latitude,
+        lng: walk.longitude
+      }
+    end
   end
 
   def show
@@ -31,12 +38,11 @@ class WalksController < ApplicationController
     redirect_to profil_path, notice: I18n.t('walk_destroyed', locale: :fr)
   end
 
-
   private
 
   def walk_params
     params
       .require(:walk)
-      .permit(:name, :location, :number_of_dog, :description, :date)
+      .permit(:name, :address, :number_of_dog, :description, :date)
   end
 end

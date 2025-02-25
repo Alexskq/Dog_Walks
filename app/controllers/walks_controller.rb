@@ -1,9 +1,19 @@
 class WalksController < ApplicationController
   def index
-    @walks = if params[:search] && params[:search][:query].present?
-               Walk.search_by_walk_name(params[:search][:query])
+    base_query = if params[:search] && params[:search][:query].present?
+                   Walk.search_by_walk_name(params[:search][:query])
+                 else
+                   Walk.all
+                 end
+
+    # Filtre les balades si l'utilisateur est connecté
+    @walks = if user_signed_in?
+               base_query.where.not(id: current_user.walks.pluck(:id))
+                         .where('date >= ?', Date.today)
+                         .order(date: :asc)
              else
-               Walk.all
+               base_query.where('date >= ?', Date.today)
+                         .order(date: :asc)
              end
     @user_walk = UserWalk.new
 

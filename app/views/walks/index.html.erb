@@ -1,4 +1,5 @@
 <!-- app/views/walks/index.html.erb -->
+
 <h1 class="text-center text-3xl font-bold mt-4 tracking-wider">Liste des balades</h1>
 
 <%# Search Form %>
@@ -21,7 +22,7 @@
   </div>
 <% end %>
 
-<div style="width: 90%; height: 200px; border-radius:1rem"
+<div style="width: 100%; height: 200px; border-radius:1rem"
             data-controller="map"
             data-map-markers-value="<%= @markers.to_json %>"
             data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">

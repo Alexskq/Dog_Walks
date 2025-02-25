@@ -9,19 +9,23 @@ class UserWalksController < ApplicationController
   def create
     @walk = Walk.find(params[:walk_id])
 
-    # Vérifier si le nombre maximum de participants n'est pas atteint
+    if current_user.user_walks.exists?(walk: @walk)
+      return redirect_to @walk,
+                         alert: I18n.t(local: :fr,
+                                       message: :already_registered)
+    end
+
     if @walk.user_walks.count >= @walk.number_of_dog
       redirect_to @walk, alert: I18n.t(local: :fr, message: :max_participants_reached)
       return
     end
 
     @user_walk = current_user.user_walks.build(walk: @walk)
-
-    @user_walk.save
-    redirect_to @walk, notice: I18n.t(local: :fr, message: :subscribe_success)
-    # else
-    #   render @walk, status: :unprocessable_entity
-    # end
+    if @user_walk.save
+      redirect_to @walk, notice: I18n.t(local: :fr, message: :subscribe_success)
+    else
+      redirect_to @walk, alert: I18n.t(local: :fr, message: :registration_failed)
+    end
   end
 
   def destroy

@@ -1,9 +1,9 @@
 <%# Modal %>
 <%= turbo_frame_tag "walk_details_#{@walk.id}" do %>
-  zelrkjzlkerj
   <div class="flex flex-col gap-2">
-    <p><strong>Date :</strong> <%= l(@walk.date, format: :short, locale: :fr) %></p>
-    <p><strong>Lieu :</strong> <%= @walk.address %></p>
+
+    <p class="flex items-center gap-2"><strong><%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>  </strong> <%= l(@walk.date, format: :short, locale: :fr) %></p>
+    <p class="flex items-center gap-2"><strong><%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "address" %>  </strong> <%= @walk.address %></p>
     <p><strong>Nombre de places max :</strong> <%= @walk.number_of_dog %></p>
   </div>
   <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">

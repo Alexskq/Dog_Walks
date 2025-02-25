@@ -1,4 +1,4 @@
-<main class="flex flex-col items-center justify-center mx-auto gap-3">
+<div class="flex flex-col items-center justify-center gap-3">
   <%# <h1 class="text-5xl text-amber-700 font-bold mx-auto mt-12">Dog walks</h1> %>
 
   <% if user_signed_in? %>
@@ -6,7 +6,7 @@
     <p class="text-center ">Bienvenue sur <strong>Dog Walks</strong>, <br>
       ici tu peux rejoindre une balade avec ton compagnon à 4 pattes ou créer ta propre balade </p>
   <% else %>
-    <p class="text-2xl text-amber-700 font-bold mx-auto">Welcome to Dog walks</p>
+    <p class="text-2xl text-amber-700 font-bold mx-auto">Bienvenue sur Dog walks</p>
   <% end %>
 
   <div class="flex flex-col items-center justify-center gap-4 mt-4">
@@ -17,17 +17,17 @@
   <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
 
   <%# Les prochaines Balades proches %>
-  <div class="w-[80vw] mx-auto gap-4 flex flex-col items-center justify-center">
+  <div class="gap-4 flex flex-col justify-center !w-[24rem]">
     <h2 class="text-3xl font-semibold text-center mb-8">Prochaines balades</h2>
 
-    <div style="width: 90%; height: 200px; border-radius:1rem"
+    <div style="width: 100%; height: 200px; border-radius:1rem"
             data-controller="map"
             data-map-markers-value="<%= @markers.to_json %>"
             data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
 
     <% @closest_walks.each do |walk| %>
-      <div class="card border border-[#c59f60] w-96 shadow-xl rounded-lg">
+      <div class="card border border-[#c59f60] shadow-xl rounded-lg w-full">
 
 
         <%# <figure>
@@ -83,7 +83,7 @@
   </div>
 
 </div>
-</main>
+</div>
 
 
 <%# ? Afficher les balades les plus proches %>

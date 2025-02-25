@@ -7,6 +7,7 @@ module.exports = {
     "./app/assets/**/*.rb",
     "./app/javascript/**/*.js",
     "./app/views/**/*.{erb,haml,html,slim}",
+    "./app/views/users/**/*.{erb,haml,html,slim}",
     "./config/initializers/*.rb",
   ],
   theme: {

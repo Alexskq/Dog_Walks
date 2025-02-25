@@ -2,12 +2,13 @@
   coucou
   <div class="space-y-4">
     <div class=" flex">
-      <h4 class="font-semibold">Date :&nbsp;</h4>
+      <div class="flex items-center gap-4">
+        <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %> :&nbsp;</div>
       <p><%= walk.date.nil? ? 'Non définie' : l(walk.date, format: :short, locale: :fr) %></p>
     </div>
 
     <div class="flex">
-      <h4 class="font-semibold">Lieu :&nbsp;</h4>
+      <h4 class="font-semibold"> :&nbsp;</h4>
       <p><%= walk.address %></p>
     </div>
 

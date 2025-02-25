@@ -38,16 +38,15 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
-
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
   </head>
 
   <body class="mesh-gradient-custom !h-[100vh]">
+    <% if notice %>
+-      <p class="notice"><%= notice %></p>
+-    <% end %>
+-    <% if alert %>
+-      <p class="alert"><%= alert %></p>
+-    <% end %>
     <%= render 'shared/navbar' if params['action'] != 'new' %>
     <%# <main class="container mx-auto mt-28 px-5 flex"> %>
     <main class="pb-8" style="padding-bottom: 2rem;">

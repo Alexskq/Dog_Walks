@@ -1,5 +1,5 @@
-<section style="height: 100vh">
-  <div class=" rounded-full p-4 border border-white m-4">
+<section>
+  <div class=" rounded-full p-4 border border-white m-4 w-60 flex justify-center items-center mx-auto">
     <%= image_tag "bird.png", alt: "photo de profil", class:"rounded-full" %>
   </div>
 
@@ -14,12 +14,12 @@
     <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
 
     <%# les prochaines balades inscrit%>
-    <div class="!pb-16">
+    <div class=" text-center">
       <h2 class="text-3xl font-semibold">Prochaines balades</h2>
       <% current_user.walks.each do |walk| %>
         <div class="m-4 flex flex-col items-center">
           <div class="flex justify-center items-center gap-2">
-            <span><%= walk.name %> - </span>
+            <span class="font-semibold"><%= walk.name %> - </span>
             <span class="mr-4"><%= l(walk.date, format: :short, locale: :fr) %></span>
 
 
@@ -31,7 +31,7 @@
                 turbo_frame: "_top", 
                 turbo_confirm: "Voulez-vous vraiment vous désinscrire de cette balade ?" 
               } do %>
-                <%= image_tag "trash2.svg", alt: "Icône de suppression" %>
+                <%= image_tag "trash3.svg", alt: "Icône de suppression", width: 20, height: 20 %>
               <% end %>
             <% end %>
 

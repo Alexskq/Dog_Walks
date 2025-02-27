@@ -40,7 +40,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="mesh-gradient-custom !h-[100vh]">
+  <body class="mesh-gradient-custom pb-8">
     <!--
     <% if notice %>
 -      <p class="notice"><%= notice %></p>
@@ -51,8 +51,8 @@
 -->
     <%= render 'shared/navbar' if params['action'] != 'new' %>
     <%# <main class="container mx-auto mt-28 px-5 flex"> %>
-    <main class="pb-8" style="padding-bottom: 2rem;">
+    
       <%= yield %>
-    </main>
+   
   </body>
 </html>

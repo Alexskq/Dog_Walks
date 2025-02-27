@@ -12,6 +12,7 @@ module BoilerplateRails8
     config.load_defaults 8.0
 
     config.i18n.default_locale = :fr
+    config.i18n.available_locales = [:en, :fr]
     config.time_zone = "Paris"
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do

@@ -1,26 +1,26 @@
 <%= turbo_frame_tag "walk_details_#{walk.id}" do %>
-  coucou
   <div class="space-y-4">
-    <div class=" flex">
-      <div class="flex items-center gap-4">
-        <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %> :&nbsp;</div>
-      <p><%= walk.date.nil? ? 'Non définie' : l(walk.date, format: :short, locale: :fr) %></p>
-    </div>
-
-    <div class="flex">
-      <h4 class="font-semibold"> :&nbsp;</h4>
-      <p><%= walk.address %></p>
-    </div>
-
-    <div>
-      <h4 class="font-semibold">Description :</h4>
+    <div class="flex gap-2 items-center">
+      <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>
       <p><%= walk.description %></p>
     </div>
-
-
-    <div>
-      <h4 class="font-semibold">Nombre de chiens max : <%= walk.number_of_dog %> 🐶</h4>
+    <div class="flex items-center  gap-2">
+      <%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "date", height: 20  %>
+      <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
     </div>
+    <div class="flex items-center gap-2">
+      <%= image_tag "https://img.icons8.com/?size=20&id=13778&format=png&color=000000", alt: "address" %>
+      <span><%= walk.address %></span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 grow">
+        <%= image_tag "https://img.icons8.com/?size=20&id=9201&format=png&color=db924b", alt: "number of dog" %>
+        <span><%= walk.number_of_dog %> chien(s) max</span>
+
+      </div>
+
+    </div>
+
 
     <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
 
@@ -33,7 +33,7 @@
             <li><%= user_walk.user.first_name %> - <%= user_walk.user.dog.name %> </li>
           <% end %>
         </ul>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+
+      <% end %>
+    </div>
+  <% end %>

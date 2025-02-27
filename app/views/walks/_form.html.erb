@@ -2,31 +2,31 @@
   <%=
     f.input :name,
             label: 'Nom de la balade',
-            label_html: { class: 'text-[#db924b]' },
+            label_html: { class: '!text-[#db924b]' },
             input_html: {
               placeholder: 'Ex: Balade en forêt de Raismes',
-              class: '!bg-transparent/20 mt-2'
+              class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2'
             },
             class: 'py-2 '
   %>
   <%=
     f.input :description,
             label: 'Description de la balade',
-            label_html: { class: 'text-[#db924b]' },
+            label_html: { class: '!text-[#db924b]' },
             input_html: {
               placeholder: "Ex: Bol d'air frais",
-              class: '!bg-transparent/20 mt-2'
+              class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2'
             }
   %>
   <%=
     f.input :date,
             as: :string,
             input_html: {
-              class: 'datepicker !bg-transparent/20 mt-2',
+              class: 'datepicker !bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2',
               
             },
             label: 'Date et heure',
-            label_html: { class: 'text-[#db924b]' },
+            label_html: { class: '!text-[#db924b]' },
             required: true
   %>
 
@@ -42,17 +42,17 @@
       -->
   <%= f.input :address, 
               label: 'Lieu',
-              label_html: { class: 'text-[#db924b]' },
+              label_html: { class: '!text-[#db924b]' },
               input_html: {
-                class: '!bg-transparent/20 mt-2',
+                class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2',
                 placeholder: 'Ex: Parc de la Rhônelle',
               } %>
   <%=
     f.input :number_of_dog,
             label: 'Nombre de chiens maximum',
-            label_html: { class: 'text-[#db924b]' },
+            label_html: { class: '!text-[#db924b]' },
             input_html: {
-              class: '!bg-transparent/20 mt-2',
+              class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 ',
               min: 1,
               max: 6,
               type: 'number',

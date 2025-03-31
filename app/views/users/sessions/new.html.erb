@@ -1,4 +1,4 @@
-<section class="flex flex-col items-center justify-center pt-24 h-full !pb-24" style="height: 100vh;">
+<section class="flex flex-col items-center justify-center pt-16 h-full !pb-24" style="height: 100vh;">
   <div class="mx-auto">
     <h1 class=" text-amber-500 text-center text-4xl my-10 font-luckiest bg tracking-wider">
       Dog Harmonie Balades 
@@ -75,11 +75,12 @@
             <%=
               f.input :remember_me,
                       as: :boolean,
+                      label_html: { class: "!text-stone-400 " },
                       wrapper_html: {
                         class: 'bg-transparent',
                       },
                       input_html: {
-                        class: '',
+                        class: 'bg-transparent border !border-amber-500/50 checked:!bg-amber-500 checked:!border-amber-500 focus:ring-amber-500 ml-3',
                       }
             %>
           </div>
@@ -87,11 +88,11 @@
       </div>
 
       <div class="form-actions flex justify-center my-4">
-        <%= f.button :submit, 'Log in', class: 'btn btn-success' %>
+        <%= f.button :submit, 'Se connecter', class: 'btn btn-primary' %>
       </div>
     <% end %>
 
-    <div class="flex gap-4">
+    <div class="flex items-center justify-center gap-2">
       <%= render 'users/shared/links' %>
     </div>
   </div>

@@ -1,28 +1,8 @@
 class WalksController < ApplicationController
   def index
-    base_query = if params[:search] && params[:search][:query].present?
-                   Walk.search_by_walk_name(params[:search][:query])
-                 else
-                   Walk.all
-                 end
-
-    # Filtre les balades si l'utilisateur est connecté
-    @walks = if user_signed_in?
-               base_query.where.not(id: current_user.walks.pluck(:id))
-                         .where('date >= ?', Date.today)
-                         .order(date: :asc)
-             else
-               base_query.where('date >= ?', Date.today)
-                         .order(date: :asc)
-             end
+    @walks = filtered_walks
     @user_walk = UserWalk.new
-
-    @markers = @walks.geocoded.map do |walk|
-      {
-        lat: walk.latitude,
-        lng: walk.longitude
-      }
-    end
+    @markers = build_markers
   end
 
   def show
@@ -35,6 +15,8 @@ class WalksController < ApplicationController
 
   def create
     @walk = Walk.new(walk_params)
+    @walk.users << current_user if user_signed_in?
+
     if @walk.save
       redirect_to walks_path, notice: I18n.t('walk_created', locale: :fr)
     else
@@ -49,6 +31,32 @@ class WalksController < ApplicationController
   end
 
   private
+
+  def filtered_walks
+    base_query = build_base_query
+    return base_query.where('date >= ?', Date.today).order(date: :asc) unless user_signed_in?
+
+    base_query.where.not(id: current_user.walks.select(:id))
+              .where('date >= ?', Date.today)
+              .order(date: :asc)
+              .includes(:user_walks)
+  end
+
+  def build_base_query
+    return Walk.search_by_walk_name(params[:search][:query]) if params.dig(:search, :query).present?
+
+    Walk.all
+  end
+
+  def build_markers
+    @walks.geocoded.map do |walk|
+      {
+        lat: walk.latitude,
+        lng: walk.longitude
+
+      }
+    end
+  end
 
   def walk_params
     params

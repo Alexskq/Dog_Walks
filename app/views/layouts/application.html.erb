@@ -40,7 +40,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="mesh-gradient-custom pb-8">
+  <body class="mesh-gradient-custom min-h-screen <%= params['action'] == 'new' && params['controller'] == 'walks' ? 'h-screen' : 'h-full' %>">
     <!--
     <% if notice %>
 -      <p class="notice"><%= notice %></p>

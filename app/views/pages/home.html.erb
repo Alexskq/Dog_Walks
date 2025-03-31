@@ -1,8 +1,8 @@
-<div class="flex flex-col items-center justify-center gap-3">
-  <%# <h1 class="text-5xl text-amber-700 font-bold mx-auto mt-12">Dog walks</h1> %>
+<div class="flex flex-col items-center justify-center gap-3 pb-8">
+
 
   <% if user_signed_in? %>
-    <h2 class="text-4xl text-amber-500 font-bold mx-auto mt-8">Hello <%= current_user.first_name %> </h2>
+    <h2 class="text-4xl text-amber-500 font-bold mx-auto mt-8 font-luckiest tracking-wider">Hello <%= current_user.first_name %> </h2>
     <p class="text-center ">Bienvenue sur <strong>Dog Walks</strong>, <br>
       ici tu peux rejoindre une balade avec ton compagnon à 4 pattes ou créer ta propre balade </p>
   <% else %>

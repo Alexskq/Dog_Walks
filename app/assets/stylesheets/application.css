@@ -11,3 +11,31 @@
  */
 
 /* @import "background"; */
+
+.mapboxgl-ctrl-geocoder {
+  max-width: none;
+ 
+  box-shadow: none;
+  background-color: transparent !important;
+}
+
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--input {
+  background-color: transparent !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid #d1d5db80 !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem !important;
+  font-size: 1rem !important;
+  width: 100%;
+  margin-top: 0.5rem !important;
+  color: #d1d5db80 !important;
+}
+
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--input::placeholder {
+  color: rgba(222, 222, 222, 0.5) !important;
+}
+
+
+.mapboxgl-ctrl-geocoder--icon.mapboxgl-ctrl-geocoder--icon-search {
+  display: none;
+}

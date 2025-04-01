@@ -86,27 +86,75 @@
 
     <%# les prochaines balades inscrit%>
     <div class=" text-center">
-      <h2 class="text-3xl font-semibold">Prochaines balades</h2>
+      <h2 class="text-2xl font-semibold">Prochaines balades</h2>
       <% current_user.walks.each do |walk| %>
         <div class="m-4 flex flex-col items-center">
           <div class="flex justify-center items-center gap-2">
-            <span class="font-semibold"><%= walk.name %> - </span>
-            <span class="mr-4"><%= l(walk.date, format: :short, locale: :fr) %></span>
+            <span class="font-semibold"><%= walk.name %></span>
+            <span class="mr-4">- <%= l(walk.date, format: :short, locale: :fr) %></span>
 
+            <button class="flex items-center" onclick="walk_details_modal_<%= walk.id %>.showModal()">
+              <span class="text-2xl">+</span>
+            </button>
 
             <% if walk.user_walks.exists?(user: current_user) %>
               <%=
-    link_to destroy_user_walk_path(walk_id: walk.id),
-              data: { 
-                turbo_method: :delete, 
-                turbo_frame: "_top", 
-                turbo_confirm: "Voulez-vous vraiment vous désinscrire de cette balade ?" 
-              } do %>
+                link_to destroy_user_walk_path(walk_id: walk.id),
+                data: { 
+                  turbo_method: :delete, 
+                  turbo_frame: "_top", 
+                  turbo_confirm: "Voulez-vous vraiment vous désinscrire de cette balade ?" 
+                } do %>
                 <%= image_tag "trash3.svg", alt: "Icône de suppression", width: 20, height: 20 %>
               <% end %>
             <% end %>
-
           </div>
+
+          <%# Modal des détails de la balade %>
+          <dialog id="walk_details_modal_<%= walk.id %>" class="modal">
+            <div class="modal-box">
+              <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              </form>
+              <h3 class="text-lg font-bold text-center mb-2"><%= walk.name %></h3>
+              <hr class="border border-[#c59f60] w-[60%] mx-auto m-2">
+
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-2">
+                  <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "date" %>
+                  <span><%= l(walk.date, format: :long, locale: :fr) %></span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "address" %>
+                  <span><%= walk.address %></span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <%= image_tag "https://img.icons8.com/?size=20&id=9201&format=png&color=db924b", alt: "number of dog" %>
+                  <span><%= walk.number_of_dog %> chien(s) maximum</span>
+                </div>
+
+                <% if walk.description.present? %>
+                  <div class="flex items-start gap-2">
+                    <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>
+                    <span><%= walk.description %></span>
+                  </div>
+                <% end %>
+
+                <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
+
+                <div >
+                  <p class="text-center mb-2"><strong>Participants -</strong> (<%= walk.user_walks.count %>/<%= walk.number_of_dog %>)</p>
+                  <ul class="list-disc">
+                    <% walk.user_walks.each do |user_walk| %>
+                      <li><%= user_walk.user.first_name %> <%= user_walk.user.last_name %> - <%= user_walk.user.dog.name %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </dialog>
         </div>
       <% end %>
 

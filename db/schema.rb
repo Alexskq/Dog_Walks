@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_27_155423) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_01_133127) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,6 +19,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_27_155423) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "species"
+    t.date "date_of_birth"
+    t.text "description"
     t.index ["user_id"], name: "index_dogs_on_user_id"
   end
 

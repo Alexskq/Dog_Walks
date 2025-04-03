@@ -12,17 +12,15 @@
         placeholder: 'Lieu, nom de la balade...',
       } 
     %>
-    <%= f.button :submit, 'Rechercher', class: 'btn btn-primary' %>
+    <%= f.button :submit, 'Rechercher', class: 'btn btn-primary rounded-full px-4 py-1 text-sm' %>
   <% end %>
 
   <% if user_signed_in? %>
     <div class="flex justify-center items-center gap-4 my-4">
-      <%= link_to 'Créer une balade', new_walk_path, class: 'btn btn-primary' %>
-      <%= link_to walks_path(today: true), class: "btn #{params[:today].present? ? 'btn-accent' : 'btn-secondary'} relative" do %>
+      <%= link_to 'Créer une balade', new_walk_path, class: 'btn btn-primary rounded-full px-4 py-1 text-sm' %>
+      <%= link_to walks_path(today: params[:today].present? ? nil : true), 
+          class: "btn #{params[:today].present? ? 'btn-accent shadow-lg shadow-[#c59f60]/30 border-2 border-[#c59f60]' : 'btn-secondary'} rounded-full px-4 py-1 text-sm" do %>
         Balades du jour
-        <% if params[:today].present? %>
-          <span class="absolute -top-2 -right-2 w-3 h-3 bg-green-500 rounded-full"></span>
-        <% end %>
       <% end %>
     </div>
   <% end %>

@@ -1,7 +1,16 @@
 <div class="navbar border-b-2 border-amber-500">
   <div class="flex-1">
-    <%= link_to "DH Balades", root_path,class:"btn btn-ghost text-xl font-luckiest tracking-wide"%>
-
+    <%= link_to "DH Balades", root_path, class: "btn btn-ghost text-xl font-luckiest tracking-wide" %>
+    <% if current_user&.admin? %>
+      <%= link_to admin_walks_path, class: "btn btn-ghost text-lg relative" do %>
+        <i class="fas fa-shield-alt"></i>
+        <% if pending_walks_count > 0 %>
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            <%= pending_walks_count %>
+          </span>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
   <div class="flex-none gap-2">
     <%# <div class="form-control">
@@ -29,9 +38,12 @@
         <li>
           <%= link_to "Profil", profil_path  %>
         </li>
-
         <li><%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete } %></li>
       </ul>
     </div>
   </div>
 </div>
+
+<% content_for :head do %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<% end %>

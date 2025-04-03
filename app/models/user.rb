@@ -16,4 +16,8 @@ class User < ApplicationRecord
 
   has_many :user_walks, dependent: :destroy
   has_many :walks, through: :user_walks
+
+  def admin?
+    admin
+  end
 end

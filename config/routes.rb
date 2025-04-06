@@ -11,9 +11,19 @@ Rails
     resources :walks do
       resources :user_walks, only: %i[new create destroy]
     end
-root to: 'pages#home' # rubocop:disable Style/StringLiterals
 
-get "/profil", to: "pages#profil", as: 'profil'
-delete "/destroy_user_walk", to: "pages#destroy_user_walk"
- 
+    resource :dog, only: [:update]
+
+    root to: 'pages#home' # rubocop:disable Style/StringLiterals
+
+    get "/profil", to: "pages#profil", as: 'profil'
+    delete "/destroy_user_walk", to: "pages#destroy_user_walk"
+
+    namespace :admin do
+      resources :walks do
+        member do
+          post :validate
+        end
+      end
+    end
   end

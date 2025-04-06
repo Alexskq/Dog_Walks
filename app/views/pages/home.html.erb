@@ -3,8 +3,8 @@
 
   <% if user_signed_in? %>
     <h2 class="text-4xl text-amber-500 font-bold mx-auto mt-8 font-luckiest tracking-wider">Hello <%= current_user.first_name %> </h2>
-    <p class="text-center ">Bienvenue sur <strong>Dog Walks</strong>, <br>
-      ici tu peux rejoindre une balade avec ton compagnon à 4 pattes ou créer ta propre balade </p>
+    <p class="text-center "><!--Bienvenue sur <strong>Dog Walks</strong>, <br> -->
+      Ici tu peux rejoindre une balade avec ton compagnon à 4 pattes ou créer ta propre balade </p>
   <% else %>
     <p class="text-2xl text-amber-700 font-bold mx-auto">Bienvenue sur Dog walks</p>
   <% end %>
@@ -18,7 +18,18 @@
 
   <%# Les prochaines Balades proches %>
   <div class="gap-4 flex flex-col justify-center !w-[22rem]">
-    <h2 class="text-3xl font-semibold text-center mb-8">Prochaines balades</h2>
+    <div class="dropdown dropdown-bottom w-full">
+      <div tabindex="0" role="button" class="flex items-center justify-between w-full p-4 bg-base-100/60 rounded-lg shadow hover:bg-base-200 cursor-pointer">
+        <h2 class="text-2xl font-semibold text-center"><%= @dropdown_title %></h2>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full">
+        <li><%= link_to 'Toutes les balades', root_path(view_type: 'all'), class: 'text-center' %></li>
+        <li><%= link_to 'Mes balades inscrites', root_path(view_type: 'my_walks'), class: 'text-center' %></li>
+      </ul>
+    </div>
 
     <div style="width: 100%; height: 200px; border-radius:1rem"
             data-controller="map"

@@ -15,5 +15,5 @@ two:
   email: anais2@mail.com
   first_name: Anaïs
   last_name: carlier
-  admin: true
+  admin: false
   encrypted_password: <%= Devise::Encryptor.digest(User, 'coucou') %>

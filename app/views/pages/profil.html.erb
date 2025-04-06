@@ -7,7 +7,7 @@
   <div class="flex flex-col items-center">
     <div class="m-4 flex flex-col items-center">
       <h2 class="text-3xl font-semibold mb-4 flex items-center gap-2">
-        <%= link_to edit_user_registration_path, class: "flex items-center gap-2" do %>
+        <%= link_to edit_user_registration_path, class: "flex items-center gap-2 hover:opacity-80 transition-opacity" do %>
           Info personnel
           <%= image_tag "edit.png", alt: "Modifier le profil", class: "w-6 h-6" %>
         <% end %>
@@ -17,7 +17,7 @@
       <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
       <div class="mt-2">
 
-        <button class="flex items-center gap-2 rounded-full p-2 text-2xl font-bold" onclick="dog_edit_modal.showModal()">
+        <button class="flex items-center gap-2 rounded-full p-2 text-2xl font-bold hover:opacity-80 transition-opacity" onclick="dog_edit_modal.showModal()">
           <span class="pl-2">Informations de <%= current_user.dog.name %></span>
           <%= image_tag "edit.png", alt: "Modifier le profil", class: "w-6 h-6" %>
         </button>
@@ -94,8 +94,13 @@
           <div class="flex justify-center items-center gap-2">
             <span class="font-semibold"><%= walk.name %></span>
             <span class="mr-4">- <%= l(walk.date, format: :short, locale: :fr) %></span>
+            <% if walk.validated? %>
+              <span class="badge badge-success">Validée</span>
+            <% else %>
+              <span class="badge badge-warning">En attente</span>
+            <% end %>
 
-            <button class="flex items-center" onclick="walk_details_modal_<%= walk.id %>.showModal()">
+            <button class="flex items-center hover:opacity-80 transition-opacity" onclick="walk_details_modal_<%= walk.id %>.showModal()">
               <span class="text-2xl">+</span>
             </button>
 

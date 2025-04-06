@@ -1,94 +1,93 @@
-<div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h2">Dashboard Administrateur</h1>
-  </div>
-
-  <!-- Version desktop - tableau -->
-  <!--
-  <div class="d-none d-md-block">
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Nom de la balade</th>
-            <th>Date</th>
-            <th>Adresse</th>
-            <th>Participants</th>
-            <th>Statut</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @walks.each do |walk| %>
-            <tr>
-              <td><%= walk.name %></td>
-              <td><%= walk.date.strftime("%d/%m/%Y %H:%M") %></td>
-              <td><%= walk.address %></td>
-              <td><%= walk.users.count %></td>
-              <td>
-                <% if walk.validated? %>
-                  <span class="badge bg-success">Validée</span>
-                <% else %>
-                  <span class="badge bg-warning">En attente</span>
-                <% end %>
-              </td>
-              <td>
-                <%= link_to "Voir détails", admin_walk_path(walk), class: "btn btn-primary btn-sm" %>
-                <% unless walk.validated? %>
-                  <%= button_to "Valider", validate_admin_walk_path(walk), method: :post, class: "btn btn-success btn-sm mt-1" %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+<div class="container pb-8 mt-4 mx-auto px-4">
+  <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+    <h1 class="text-2xl font-bold text-center">Dashboard Administrateur</h1>
+    <div class="w-full sm:w-auto">
+      <%= link_to new_walk_path, class: "btn btn-primary w-full sm:w-auto" do %>
+        <i class="fas fa-plus me-2"></i>Nouvelle balade
+      <% end %>
     </div>
   </div>
--->
-  <!-- Version mobile - cartes -->
-  <div class="d-md-none">
+
+  <div class="flex flex-col gap-4 w-full sm:w-4/5 mx-auto">
     <% @walks.each do |walk| %>
-      <div class="card mb-3 shadow-sm">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-start mb-2">
-            <h5 class="card-title mb-0"><%= walk.name %></h5>
-            <% if walk.validated? %>
-              <span class="badge bg-success">Validée</span>
-            <% else %>
-              <span class="badge bg-warning">En attente</span>
-            <% end %>
+      <details class="bg-base-100 rounded-box shadow-sm">
+        <summary class="p-4 cursor-pointer hover:bg-base-200 hover:rounded-lg transition-colors">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <span class="font-medium"><%= walk.name %></span>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-sm text-gray-500"><%= walk.date.strftime("%d/%m/%Y %H:%M") %></span>
+                <span class="text-sm text-gray-500"><%= walk.address %></span>
+                <span class="text-sm text-gray-500"><%= pluralize(walk.users.count, 'participant') %></span>
+                <% if walk.validated? %>
+                  <span class="badge badge-success">Validée</span>
+                <% else %>
+                  <span class="badge badge-warning">En attente</span>
+                <% end %>
+              </div>
+            </div>
+            <div class="flex items-center justify-between sm:justify-end gap-2">
+              <div class="flex gap-2" onclick="event.stopPropagation();">
+                <%= link_to admin_walk_path(walk), class: "btn btn-sm btn-outline" do %>
+                  <i class="fas fa-eye"></i>
+                <% end %>
+                <% unless walk.validated? %>
+                  <%= button_to validate_admin_walk_path(walk), method: :post, class: "btn btn-sm btn-success" do %>
+                    <i class="fas fa-check"></i>
+                  <% end %>
+                <% end %>
+              </div>
+              <i class="fas fa-chevron-down text-gray-400 toggle-icon"></i>
+            </div>
           </div>
-
-          <div class="card-text">
-            <div class="mb-2">
-              <i class="fas fa-calendar-alt me-2"></i>
-              <%= walk.date.strftime("%d/%m/%Y %H:%M") %>
-            </div>
-
-            <div class="mb-2">
-              <i class="fas fa-map-marker-alt me-2"></i>
-              <%= walk.address %>
-            </div>
-
-            <div class="mb-3">
-              <i class="fas fa-users me-2"></i>
-              <%= pluralize(walk.users.count, 'participant') %>
-            </div>
-          </div>
-
-          <div class="d-flex gap-2">
-            <%= link_to "Voir détails", admin_walk_path(walk), class: "btn btn-primary" %>
-            <% unless walk.validated? %>
-              <%= button_to "Valider", validate_admin_walk_path(walk), method: :post, class: "btn btn-success" %>
-            <% end %>
+        </summary>
+        <div class="p-4 bg-base-200 rounded-b-box">
+          <div class="overflow-x-auto -mx-4 sm:mx-0">
+            <table class="table table-zebra w-full">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th class="hidden sm:table-cell">Email</th>
+                  <th>Chien</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% walk.users.each do |user| %>
+                  <tr>
+                    <td><%= user.first_name %> <%= user.last_name %></td>
+                    <td class="hidden sm:table-cell"><%= user.email %></td>
+                    <td>
+                      <% if user.dog %>
+                        <%= user.dog.name %>
+                      <% else %>
+                        <span class="text-gray-400">Aucun chien</span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
+      </details>
     <% end %>
   </div>
 </div>
 
-<!-- Ajout du CSS pour les icônes Font Awesome -->
 <% content_for :head do %>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    details > summary {
+      list-style: none;
+    }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+    .toggle-icon {
+      transition: transform 0.3s ease;
+    }
+    details[open] .toggle-icon {
+      transform: rotate(180deg);
+    }
+  </style>
 <% end %>

@@ -4,6 +4,14 @@
     <p class="flex items-center gap-2"><strong><%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>  </strong> <%= l(@walk.date, format: :short, locale: :fr) %></p>
     <p class="flex items-center gap-2"><strong><%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "address" %>  </strong> <%= @walk.address %></p>
     <p><strong>Nombre de places max :</strong> <%= @walk.number_of_dog %></p>
+    <p class="flex items-center gap-2">
+      <strong>Statut :</strong>
+      <% if @walk.validated? %>
+        <span class="badge badge-success">Validée</span>
+      <% else %>
+        <span class="badge badge-warning">En attente</span>
+      <% end %>
+    </p>
     <%# <% if @walk.registration_deadline.present? %>
     <%# <p class="flex items-center gap-2"><strong><%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "deadline"   </strong> Date limite d'inscription : <%= l(@walk.registration_deadline, format: :short, locale: :fr) %></p>
   <%# <% end %>

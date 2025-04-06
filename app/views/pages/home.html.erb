@@ -2,7 +2,7 @@
 
 
   <% if user_signed_in? %>
-    <h2 class="text-4xl text-amber-500 font-bold mx-auto mt-8 font-luckiest tracking-wider">Hello <%= current_user.first_name %> </h2>
+    <h2 class="text-4xl text-amber-500 font-bold mx-auto mt-8 font-luckiest tracking-widest">Hello <%= current_user.first_name %> </h2>
     <p class="text-center "><!--Bienvenue sur <strong>Dog Walks</strong>, <br> -->
       Ici tu peux rejoindre une balade avec ton compagnon à 4 pattes ou créer ta propre balade </p>
   <% else %>
@@ -19,8 +19,8 @@
   <%# Les prochaines Balades proches %>
   <div class="gap-4 flex flex-col justify-center !w-[22rem]">
     <div class="dropdown dropdown-bottom w-full">
-      <div tabindex="0" role="button" class="flex items-center justify-between w-full p-4 bg-base-100/60 rounded-lg shadow hover:bg-base-200 cursor-pointer">
-        <h2 class="text-2xl font-semibold text-center"><%= @dropdown_title %></h2>
+      <div tabindex="0" role="button" class="flex items-center justify-center w-full p-4 bg-base-100/60 rounded-lg shadow hover:bg-base-200 cursor-pointer">
+        <h2 class="text-2xl font-semibold text-center mr-6 tracking-wider"><%= @dropdown_title %></h2>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
         </svg>

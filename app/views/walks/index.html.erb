@@ -37,6 +37,10 @@
             data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
 
+    <div class="text-center text-sm text-gray-400 italic mb-2">
+      <p>  Seules les balades auxquelles vous n'êtes pas encore inscrit sont affichées ici</p>
+    </div>
+
     <% if @walks.empty? %>
       <p class="text-center text-md text-amber-500 !mt-10 italic font-luckiest tracking-wider">Aucune balade trouvée</p>
     <% else %>

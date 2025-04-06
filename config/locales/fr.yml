@@ -45,3 +45,4 @@ fr:
     registration_forbidden: "Vous ne pouvez pas vous désinscrire à cette balade"
     walk_created: "Balade créée avec succès"
     registration_failed: "Erreur lors de l'inscription à cette balade"
+    registration_deadline_passed: "La date limite d'inscription est dépassée pour cette balade"

@@ -1,14 +1,22 @@
 class PagesController < ApplicationController
   def home
-    # les 3 dernieres walks créees
-    @closest_walks = Walk.order('created_at DESC').limit(3)
     @user_walk = current_user.user_walks.build(walk: @walk)
-    @walks = Walk.all
 
+    # Déterminer le type de vue et le titre en fonction du paramètre
+    if params[:view_type] == 'my_walks' && user_signed_in?
+      @closest_walks = current_user.user_walks.includes(:walk).map(&:walk).sort_by(&:created_at).reverse
+      @dropdown_title = 'Mes balades inscrites'
+    else
+      @closest_walks = Walk.order('created_at DESC').limit(3)
+      @dropdown_title = 'Toutes les balades'
+    end
+
+    @walks = Walk.all
     @markers = @walks.geocoded.map do |walk|
       {
         lat: walk.latitude,
-        lng: walk.longitude
+        lng: walk.longitude,
+        info_window_html: render_to_string(partial: 'shared/info_window', locals: { walk: walk }, formats: [:html])
       }
     end
   end

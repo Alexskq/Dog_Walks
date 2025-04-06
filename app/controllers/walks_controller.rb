@@ -34,11 +34,17 @@ class WalksController < ApplicationController
 
   def filtered_walks
     base_query = build_base_query
-    return base_query.where('date >= ?', Date.today).order(date: :asc) unless user_signed_in?
+    base_query = base_query.where('date >= ?', Date.today.beginning_of_day).order(date: :asc)
+
+    if params[:today].present?
+      base_query = base_query.where('date >= ? AND date < ?',
+                                    Date.today.beginning_of_day,
+                                    Date.today.end_of_day)
+    end
+
+    return base_query unless user_signed_in?
 
     base_query.where.not(id: current_user.walks.select(:id))
-              .where('date >= ?', Date.today)
-              .order(date: :asc)
               .includes(:user_walks)
   end
 
@@ -52,8 +58,8 @@ class WalksController < ApplicationController
     @walks.geocoded.map do |walk|
       {
         lat: walk.latitude,
-        lng: walk.longitude
-
+        lng: walk.longitude,
+        info_window_html: render_to_string(partial: 'shared/info_window', locals: { walk: walk }, formats: [:html])
       }
     end
   end

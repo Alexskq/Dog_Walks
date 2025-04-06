@@ -44,9 +44,12 @@
               label: 'Lieu',
               label_html: { class: '!text-[#db924b]' },
               input_html: {
-                class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2',
+                class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 hidden',
                 placeholder: 'Ex: Parc de la Rhônelle',
-              } %>
+                data: {address_autocomplete_target: "address"}
+              },
+              wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}
+  %>
   <%=
     f.input :number_of_dog,
             label: 'Nombre de chiens maximum',

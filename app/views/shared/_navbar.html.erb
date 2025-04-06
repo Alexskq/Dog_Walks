@@ -1,9 +1,9 @@
 <div class="navbar border-b-2 border-amber-500">
-  <div class="flex-1">
+  <div class="flex-1 justify-between ">
     <%= link_to "DH Balades", root_path, class: "btn btn-ghost text-xl font-luckiest tracking-wide" %>
     <% if current_user&.admin? %>
-      <%= link_to admin_walks_path, class: "btn btn-ghost text-lg relative" do %>
-        <i class="fas fa-shield-alt"></i>
+      <%= link_to admin_walks_path, class: "btn btn-ghost text-lg relative mr-4" do %>
+        <%= image_tag "shield.png", class: "w-5 h-5" %>
         <% if pending_walks_count > 0 %>
           <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
             <%= pending_walks_count %>
@@ -13,21 +13,10 @@
     <% end %>
   </div>
   <div class="flex-none gap-2">
-    <%# <div class="form-control">
-      <input
-        type="text"
-        placeholder="Search"
-        class="input input-bordered w-24 md:w-auto"
-      />
-    </div> %>
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <%# <img
-            alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            width="40"
-          /> %>
+
           <%= image_tag "logo.png", class: "w-10 rounded-full" %>
         </div>
       </div>
@@ -43,7 +32,3 @@
     </div>
   </div>
 </div>
-
-<% content_for :head do %>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<% end %>

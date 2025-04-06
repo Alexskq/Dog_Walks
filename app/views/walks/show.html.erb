@@ -4,19 +4,26 @@
     <p class="flex items-center gap-2"><strong><%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>  </strong> <%= l(@walk.date, format: :short, locale: :fr) %></p>
     <p class="flex items-center gap-2"><strong><%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "address" %>  </strong> <%= @walk.address %></p>
     <p><strong>Nombre de places max :</strong> <%= @walk.number_of_dog %></p>
-  </div>
-  <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
+    <%# <% if @walk.registration_deadline.present? %>
+    <%# <p class="flex items-center gap-2"><strong><%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "deadline"   </strong> Date limite d'inscription : <%= l(@walk.registration_deadline, format: :short, locale: :fr) %></p>
+  <%# <% end %>
 
-  <p class="text-center mb-2"><strong>Participants -</strong> (<%= @walk.user_walks.count %>/<%= @walk.number_of_dog %>)</p>
-  <ul>
-    <% @walk.user_walks.each do |user_walk| %>
-      <li class="list-disc list-inside"><%= user_walk.user.first_name %> <%= user_walk.user.last_name %> - <%= user_walk.user.dog.name %></li>
-    <% end %>
-  </ul>
+  <% if @walk.date.present? && Time.current + 12.hours > @walk.date %>
+    <p class="text-red-500"><strong>⚠️ Inscription impossible :</strong> Cette balade a lieu dans moins de 12 heures</p>
+  <% end %>
+</div>
+<hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
 
-  <% if user_signed_in? %>
-    <% if @walk.user_walks.exists?(user: current_user) %>
-      <%=
+<p class="text-center mb-2"><strong>Participants -</strong> (<%= @walk.user_walks.count %>/<%= @walk.number_of_dog %>)</p>
+<ul>
+  <% @walk.user_walks.each do |user_walk| %>
+    <li class="list-disc list-inside"><%= user_walk.user.first_name %> <%= user_walk.user.last_name %> - <%= user_walk.user.dog.name %></li>
+  <% end %>
+</ul>
+
+<% if user_signed_in? %>
+  <% if @walk.user_walks.exists?(user: current_user) %>
+    <%=
       button_to 'Se désinscrire',
                 walk_user_walk_path(
                   @walk,
@@ -25,18 +32,19 @@
                 method: :delete,
                 class: 'btn btn-outline btn-primary m-4 flex mx-auto'
     %>
-    <% else %>
-      <% if @walk.user_walks.count < @walk.number_of_dog %>
-        <%= link_to 'S\'inscrire',
+  <% else %>
+    <% if @walk.user_walks.count < @walk.number_of_dog && (!@walk.date.present? || Time.current + 12.hours <= @walk.date) %>
+      <%= link_to 'S\'inscrire',
                     walk_user_walks_path(@walk),
                     data: { turbo_method: :post, turbo_frame: "walk_details_#{@walk.id}" },
                     class: 'btn btn-primary m-4 flex mx-auto'
         %>
-      <% else %>
+    <% else %>
+      <% if @walk.user_walks.count >= @walk.number_of_dog %>
         <p>Cette balade est complète</p>
       <% end %>
     <% end %>
   <% end %>
-
+<% end %>
 
 <% end %>

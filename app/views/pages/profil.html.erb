@@ -6,12 +6,21 @@
   <%# info  %>
   <div class="flex flex-col items-center">
     <div class="m-4 flex flex-col items-center">
-      <h2 class="text-3xl font-semibold mb-4">Info personnel</h2>
+      <h2 class="text-3xl font-semibold mb-4 flex items-center gap-2">
+        <%= link_to edit_user_registration_path, class: "flex items-center gap-2" do %>
+          Info personnel
+          <%= image_tag "edit.png", alt: "Modifier le profil", class: "w-6 h-6" %>
+        <% end %>
+      </h2>
       <span><strong>Mail : </strong><%= current_user.email %></span>
 
       <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
       <div class="mt-2">
-        <h3 class="text-xl font-semibold mb-2 text-center">Informations de <%= current_user.dog.name %></h3>
+
+        <button class="flex items-center gap-2 rounded-full p-2 text-2xl font-bold" onclick="dog_edit_modal.showModal()">
+          <span class="pl-2">Informations de <%= current_user.dog.name %></span>
+          <%= image_tag "edit.png", alt: "Modifier le profil", class: "w-6 h-6" %>
+        </button>
         <div class="flex flex-col gap-1">
           <% if current_user.dog.species.present? %>
             <span><strong>Race : </strong><%= current_user.dog.species %></span>
@@ -24,13 +33,6 @@
           <% end %>
         </div>
       </div>
-    </div>
-
-    <div class="m-4 flex items-center">
-      <button class="flex items-center gap-2 rounded-full bg-amber-500 p-2 text-black font-bold text-sm" onclick="dog_edit_modal.showModal()">
-        <span class="pl-2"><%= current_user.dog.name %></span>
-        <%= image_tag "edit.png", alt: "Modifier le profil", class: "w-6 h-6" %>
-      </button>
     </div>
 
     <%# Modal d'édition du chien %>

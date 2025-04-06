@@ -20,6 +20,11 @@ class UserWalksController < ApplicationController
       return
     end
 
+    if @walk.date.present? && 12.hours.from_now > @walk.date
+      redirect_to @walk, alert: I18n.t(local: :fr, message: :registration_deadline_passed)
+      return
+    end
+
     @user_walk = current_user.user_walks.build(walk: @walk)
     if @user_walk.save
       redirect_to @walk, notice: I18n.t(local: :fr, message: :subscribe_success)

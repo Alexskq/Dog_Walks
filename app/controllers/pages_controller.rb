@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def home
     @user_walk = current_user.user_walks.build(walk: @walk)
+    @dropdown_title = 'Toutes les balades'
 
     # Déterminer le type de vue et le titre en fonction du paramètre
     if params[:view_type] == 'my_walks' && user_signed_in?

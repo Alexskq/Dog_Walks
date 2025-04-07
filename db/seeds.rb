@@ -12,12 +12,20 @@ puts 'Destroying users...'
 User.destroy_all
 
 # Create a user with admin role
-User.create!(
+admin = User.create!(
   email: 'admin@example.com',
   first_name: 'Alex',
   last_name: 'Dog-Harmonie',
   password: 'password',
   password_confirmation: 'password',
   admin: true
+)
+
+Dog.create!(
+  name: 'Koda',
+  species: 'Berger Ecossais',
+  date_of_birth: Date.new(2020, 5, 15),
+  description: 'Un chien fidèle et intelligent',
+  user: admin
 )
 puts 'Done...'

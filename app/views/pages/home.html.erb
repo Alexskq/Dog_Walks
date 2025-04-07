@@ -93,6 +93,17 @@
               <div class="flex items-center gap-2 grow text-sm sm:text-base">
                 <%= image_tag "https://img.icons8.com/?size=20&id=9201&format=png&color=db924b", alt: "number of dog" %>
                 <span><%= walk.number_of_dog %> chien(s) max</span>
+                <div class="avatar-group -space-x-6 rtl:space-x-reverse">
+                  <% walk.users.includes(:dog).each do |user| %>
+                    <% if user.dog.present? %>
+                      <div class="avatar">
+                        <div class="w-6">
+                          <%= dog_photo_tag(user.dog, size: :small) %>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
               <% if params[:view_type] == 'all' %>
                 <div class="card-actions" onclick="signup_modal_<%= walk.id %>.showModal()">

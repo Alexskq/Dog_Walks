@@ -4,7 +4,7 @@ class Walk < ApplicationRecord
 
   has_many :user_walks, dependent: :destroy
   has_many :users, through: :user_walks
-  has_many :dogs, through: :users, source: :dogs
+  has_many :dogs, through: :users
 
   validates :number_of_dog, presence: true, numericality: {
     only_integer: true,
@@ -20,6 +20,6 @@ class Walk < ApplicationRecord
                     dogs: [:name]
                   },
                   using: {
-                    tsearch: { prefix: true } 
+                    tsearch: { prefix: true }
                   }
 end

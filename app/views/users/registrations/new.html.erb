@@ -1,6 +1,6 @@
 <section class="flex flex-col items-center justify-center text-[#db924b]">
   <h1 class="text-center text-4xl my-10 font-luckiest">Crée ton compte</h1>
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'flex flex-col items-center gap-12' }) do |f| %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'flex flex-col items-center gap-12', multipart: true }) do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs w-full max-w-md">
       <%= f.input :email,
@@ -42,6 +42,15 @@
                     autocomplete: 'new-password',
                     class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
                   } %>
+
+      <%= f.input :avatar,
+                  as: :file,
+                  label: 'Photo de profil',
+                  label_html: { class: '!text-[#db924b]' },
+                  input_html: { 
+                    class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
+                  } %>
+
       <!-- Champs pour le chien -->
       <%= f.simple_fields_for :dog, resource.build_dog do |dog_form| %>
         <%= dog_form.input :name, 
@@ -49,7 +58,14 @@
             label: 'Nom du chien',
             label_html: { class: '!text-[#db924b]' },
             input_html: { 
-              class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400 '
+              class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
+            } %>
+        <%= dog_form.input :photo,
+            as: :file,
+            label: 'Photo du chien',
+            label_html: { class: '!text-[#db924b]' },
+            input_html: { 
+              class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
             } %>
       <% end %>
     </div>

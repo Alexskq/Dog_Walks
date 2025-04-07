@@ -44,14 +44,15 @@ module Users
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, { dog_attributes: [:name] }])
+      devise_parameter_sanitizer.permit(:sign_up,
+                                        keys: [:first_name, :last_name, :avatar, { dog_attributes: %i[name photo] }])
     end
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_account_update_params
       devise_parameter_sanitizer.permit(:account_update,
-                                        keys: [:first_name, :last_name,
-                                               { dog_attributes: %i[id name species date_of_birth description] }])
+                                        keys: [:first_name, :last_name, :avatar,
+                                               { dog_attributes: %i[id name species date_of_birth description photo] }])
     end
 
     # Initialiser l'objet Dog

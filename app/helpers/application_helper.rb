@@ -1,2 +1,19 @@
 module ApplicationHelper
+  def dog_photo_tag(dog, size: :small)
+    unless dog
+      return image_tag "https://img.icons8.com/?size=#{size == :small ? '24' : '40'}&id=13778&format=png&color=db924b",
+                       alt: 'photo par défaut',
+                       class: "rounded-full #{size == :small ? 'w-6 h-6' : 'w-10 h-10'} object-cover bg-gray-200"
+    end
+
+    if dog.photo.attached?
+      image_tag dog.photo,
+                alt: "photo de #{dog.name}",
+                class: "rounded-full #{size == :small ? 'w-6 h-6' : 'w-10 h-10'} object-cover"
+    else
+      image_tag "https://img.icons8.com/?size=#{size == :small ? '24' : '40'}&id=13778&format=png&color=db924b",
+                alt: "photo par défaut de #{dog.name}",
+                class: "rounded-full #{size == :small ? 'w-6 h-6' : 'w-10 h-10'} object-cover bg-gray-200"
+    end
+  end
 end

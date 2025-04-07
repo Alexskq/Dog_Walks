@@ -28,9 +28,7 @@
             </div>
             <div class="flex items-center justify-between sm:justify-end gap-2">
               <div class="flex gap-2" onclick="event.stopPropagation();">
-                <%= link_to admin_walk_path(walk), class: "btn btn-sm btn-outline" do %>
-                  <i class="fas fa-eye"></i>
-                <% end %>
+
                 <% unless walk.validated? %>
                   <%= button_to validate_admin_walk_path(walk), method: :post, class: "btn btn-sm btn-success" do %>
                     <i class="fas fa-check"></i>

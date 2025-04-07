@@ -11,7 +11,7 @@
     </div>
     <div class="avatar">
       <div class="w-20">
-        <% if current_user.dog.photo.attached? %>
+        <% if current_user.dog && current_user.dog.photo.attached? %>
           <%= image_tag current_user.dog.photo, alt: "photo du chien", class: "rounded-full" %>
         <% else %>
           <%= image_tag "default_dog.png", alt: "photo de chien par défaut", class: "rounded-full" %>
@@ -35,49 +35,54 @@
       <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
       <div class="mt-2">
 
-        <button class="flex items-center gap-2 rounded-full p-2 text-2xl font-bold hover:opacity-80 transition-opacity" onclick="dog_edit_modal.showModal()">
-          <span class="pl-2">Informations de <%= current_user.dog.name %></span>
-          <%= image_tag "edit.png", alt: "Modifier le profil", class: "w-6 h-6" %>
-        </button>
-        <div class="flex flex-col gap-1">
-          <% if current_user.dog.species.present? %>
-            <span><strong>Race : </strong><%= current_user.dog.species %></span>
-          <% end %>
-          <% if current_user.dog.date_of_birth.present? %>
-            <span><strong>Date de naissance : </strong><%= l(current_user.dog.date_of_birth, format: :long, locale: :fr) %></span>
-          <% end %>
-          <% if current_user.dog.description.present? %>
-            <span><strong>Description : </strong><%= current_user.dog.description %></span>
-          <% end %>
-        </div>
+        <% if current_user.dog %>
+          <button class="flex items-center gap-2 rounded-full p-2 text-2xl font-bold hover:opacity-80 transition-opacity" onclick="dog_edit_modal.showModal()">
+            <span class="pl-2">Informations de <%= current_user.dog.name %></span>
+            <%= image_tag "edit.png", alt: "Modifier le profil", class: "w-6 h-6" %>
+          </button>
+          <div class="flex flex-col gap-1">
+            <% if current_user.dog.species.present? %>
+              <span><strong>Race : </strong><%= current_user.dog.species %></span>
+            <% end %>
+            <% if current_user.dog.date_of_birth.present? %>
+              <span><strong>Date de naissance : </strong><%= l(current_user.dog.date_of_birth, format: :long, locale: :fr) %></span>
+            <% end %>
+            <% if current_user.dog.description.present? %>
+              <span><strong>Description : </strong><%= current_user.dog.description %></span>
+            <% end %>
+          </div>
+        <% else %>
+          <p>Vous n'avez pas encore ajouté de chien à votre profil.</p>
+        <% end %>
       </div>
     </div>
 
     <%# Modal d'édition du chien %>
-    <dialog id="dog_edit_modal" class="modal">
-      <div class="modal-box">
-        <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-        </form>
-        <h3 class="text-lg font-bold text-center mb-2">Modifier les informations de <%= current_user.dog.name %></h3>
-        <hr class="border border-[#c59f60] w-[60%] mx-auto m-2">
+    <% if current_user.dog %>
+      <dialog id="dog_edit_modal" class="modal">
+        <div class="modal-box">
+          <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+          <h3 class="text-lg font-bold text-center mb-2">Modifier les informations de <%= current_user.dog.name %></h3>
+          <hr class="border border-[#c59f60] w-[60%] mx-auto m-2">
 
-        <%= simple_form_for(current_user.dog, url: dog_path, method: :patch) do |f| %>
-          <%= f.input :name, 
+          <%= simple_form_for(current_user.dog, url: dog_path, method: :patch) do |f| %>
+            <%= f.input :name, 
               label: 'Nom du chien',
               label_html: { class: '!text-[#db924b]' },
               input_html: { 
                 class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
               } %>
 
-          <%= f.input :species, 
+            <%= f.input :species, 
               label: 'Race',
               label_html: { class: '!text-[#db924b]' },
               input_html: { 
                 class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
               } %>
 
-          <%= f.input :date_of_birth, 
+            <%= f.input :date_of_birth, 
               label: 'Date de naissance',
               label_html: { class: '!text-[#db924b]' },
               input_html: { 
@@ -85,7 +90,7 @@
                 type: 'date'
               } %>
 
-          <%= f.input :description, 
+            <%= f.input :description, 
               label: 'Description',
               label_html: { class: '!text-[#db924b]' },
               input_html: { 
@@ -93,13 +98,14 @@
                 rows: 4
               } %>
 
-          <div class="flex justify-center gap-4 mt-4">
-            <%= f.button :submit, 'Enregistrer', class: 'btn btn-primary' %>
-            <button type="button" class="btn btn-secondary" onclick="dog_edit_modal.close()">Annuler</button>
-          </div>
-        <% end %>
-      </div>
-    </dialog>
+            <div class="flex justify-center gap-4 mt-4">
+              <%= f.button :submit, 'Enregistrer', class: 'btn btn-primary' %>
+              <button type="button" class="btn btn-secondary" onclick="dog_edit_modal.close()">Annuler</button>
+            </div>
+          <% end %>
+        </div>
+      </dialog>
+    <% end %>
 
     <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
 

@@ -10,8 +10,6 @@
 
 puts 'Destroying users...'
 User.destroy_all
-puts 'Destroying walks...'
-Walk.destroy_all
 
 # Create a user with admin role
 User.create!(

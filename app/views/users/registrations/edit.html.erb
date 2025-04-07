@@ -1,43 +1,87 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section class="flex flex-col items-center justify-center text-[#db924b]">
+  <h1 class="text-center text-4xl my-10 font-luckiest">Modifier mon profil</h1>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'flex flex-col items-center gap-12', multipart: true }) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <div class="form-inputs w-full max-w-md">
+      <%= f.input :email,
+          required: true,
+          autofocus: true,
+          label_html: { class: '!text-[#db924b]' },
+          input_html: { 
+            autocomplete: 'email',
+            class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
+          } %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+      <%= f.input :first_name,
+          required: true,
+          autofocus: true,
+          label_html: { class: '!text-[#db924b]' },
+          input_html: { 
+            autocomplete: 'given-name',
+            class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
+          }%>
 
-     <%= f.input :first_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: 'given-name' }%>
-    <%= f.input :last_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: 'family-name' }%>
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: 'new-password' } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: 'new-password' } %>
-    <%= f.input :current_password,
-                hint: 'we need your current password to confirm your changes',
-                required: true,
-                input_html: { autocomplete: 'current-password' } %>
+      <%= f.input :last_name,
+          required: true,
+          autofocus: true,
+          label_html: { class: '!text-[#db924b]' },
+          input_html: { 
+            autocomplete: 'family-name',
+            class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
+          }%>
+
+      <%= f.input :avatar,
+          as: :file,
+          label: 'Photo de profil',
+          label_html: { class: '!text-[#db924b]' },
+          input_html: { 
+            class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
+          } %>
+
+      <%= f.input :password,
+          hint: "Laissez vide si vous ne souhaitez pas le modifier",
+          required: false,
+          label_html: { class: '!text-[#db924b]' },
+          input_html: { 
+            autocomplete: 'new-password',
+            class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
+          } %>
+
+      <%= f.input :password_confirmation,
+          required: false,
+          label_html: { class: '!text-[#db924b]' },
+          input_html: { 
+            autocomplete: 'new-password',
+            class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
+          } %>
+
+      <%= f.input :current_password,
+          hint: 'Nous avons besoin de votre mot de passe actuel pour confirmer vos modifications',
+          required: true,
+          label_html: { class: '!text-[#db924b]' },
+          input_html: { 
+            autocomplete: 'current-password',
+            class: '!bg-transparent/20 mt-2 border border-[#db924b] rounded-lg p-2 mb-2 text-zinc-400'
+          } %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Mettre à jour', class: 'btn btn-primary font-luckiest' %>
+    </div>
+  <% end %>
+
+  <div class="mt-8 text-center">
+    <div class="text-red-500">
+      <%= button_to 'Supprimer mon compte', registration_path(resource_name), 
+          data: { confirm: 'Êtes-vous sûr ?', turbo_confirm: 'Êtes-vous sûr ?' }, 
+          method: :delete,
+          class: 'btn btn-error' %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, 'Update' %>
+  <div class="mt-4 pb-10">
+    <%= link_to 'Retour', :back, class: 'text-[#db924b] hover:opacity-80 transition-opacity' %>
   </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to 'Cancel my account', registration_path(resource_name), data: { confirm: 'Are you sure?', turbo_confirm: 'Are you sure?' }, method: :delete %></div>
-
-<%= link_to 'Back', :back %>
+</section>

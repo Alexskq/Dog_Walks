@@ -20,7 +20,7 @@ class UserWalksController < ApplicationController
       return
     end
 
-    if @walk.date.present? && 12.hours.from_now > @walk.date
+    if @walk.date.present? && 6.hours.from_now > @walk.date
       redirect_to @walk, alert: I18n.t(local: :fr, message: :registration_deadline_passed)
       return
     end

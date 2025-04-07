@@ -22,6 +22,8 @@ gem 'devise', '~> 4.9'
 gem 'simple_form-tailwind'
 # Simple Form
 gem 'simple_form'
+# Active Storage
+gem 'aws-sdk-s3', require: false
 
 # Database : Postgres
 gem 'pg'
@@ -59,7 +61,7 @@ gem 'thruster', require: false
 gem 'dotenv-rails', groups: %i[development test], require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

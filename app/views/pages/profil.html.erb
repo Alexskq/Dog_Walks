@@ -1,7 +1,25 @@
-<section>
-  <div class=" rounded-full p-4 border border-white m-4 w-60 flex justify-center items-center mx-auto">
-    <%= image_tag "bird.png", alt: "photo de profil", class:"rounded-full" %>
+<section class="mt-8">
+  <div class="avatar-group -space-x-6 rtl:space-x-reverse flex justify-center items-center">
+    <div class="avatar">
+      <div class="w-20">
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar, alt: "photo de profil", class: "rounded-full" %>
+        <% else %>
+          <%= image_tag "default_avatar.svg", alt: "photo de profil par défaut", class: "rounded-full" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="avatar">
+      <div class="w-20">
+        <% if current_user.dog.photo.attached? %>
+          <%= image_tag current_user.dog.photo, alt: "photo du chien", class: "rounded-full" %>
+        <% else %>
+          <%= image_tag "default_dog.png", alt: "photo de chien par défaut", class: "rounded-full" %>
+        <% end %>
+      </div>
+    </div>
   </div>
+
 
   <%# info  %>
   <div class="flex flex-col items-center">
@@ -92,8 +110,8 @@
       <% current_user.walks.each do |walk| %>
         <div class="m-4 flex flex-col items-center">
           <div class="flex justify-center items-center gap-2">
-            <span class="font-semibold"><%= walk.name %></span>
-            <span class="mr-4">- <%= l(walk.date, format: :short, locale: :fr) %></span>
+            <span class="font-semibold text-sm"><%= walk.name %></span>
+            <span class="mr-4"><%= l(walk.date, format: :short, locale: :fr) %></span>
             <% if walk.validated? %>
               <span class="badge badge-success">Validée</span>
             <% else %>

@@ -36,7 +36,7 @@
               data-controller="map"
               data-map-markers-value="<%= @markers.to_json %>"
               data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-              class="h-[200px] sm:h-[300px] lg:h-[400px] lg:w-[70vw]">
+              class="h-[200px] w-full sm:h-[300px] lg:h-[400px] lg:w-[70vw]">
       </div>
     </div>
 
@@ -50,7 +50,14 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full lg:w-[70vw] mx-auto">
         <% @walks.each do |walk| %>
           <div class="card-body border border-[#c59f60] rounded-lg p-4 lg:p-6" data-controller="modal">
-            <h2 class="card-title self-center text-lg sm:text-xl lg:text-2xl mb-2"><%= walk.name %></h2>
+            <div class="flex justify-center gap-8 items-center">
+              <h2 class="card-title text-lg sm:text-xl"><%= walk.name %></h2>
+              <% if walk.validated? %>
+                <span class="badge badge-success">Validée</span>
+              <% else %>
+                <span class="badge badge-warning">En attente</span>
+              <% end %>
+            </div>
             <div class="flex flex-col gap-2 text-sm sm:text-base lg:text-lg">
               <div class="flex items-center gap-2">
                 <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>
@@ -66,11 +73,22 @@
               </div>
               <div class="flex items-center gap-2 grow text-sm sm:text-base">
                 <%= image_tag "https://img.icons8.com/?size=20&id=9201&format=png&color=db924b", alt: "number of dog" %>
-                <span><%= walk.number_of_dog %> chien(s) max</span>
-                <% if walk.validated? %>
-                  <span class="badge badge-success">Validée</span>
-                <% else %>
-                  <span class="badge badge-warning">En attente</span>
+                <div>
+                  <span><%= walk.number_of_dog %> chien(s) max</span>
+
+                </div>
+
+              </div>
+              <div class="avatar-group -space-x-6 rtl:space-x-reverse">
+                <% walk.users.includes(:dog).each do |user| %>
+                  <% if user.dog.present? %>
+                    <div class="avatar">
+                      <div class="w-10">
+                        <%= dog_photo_tag(user.dog, size: :large) %>
+                        <div class="text-xs text-center mt-1"><%= user.dog.name %></div>
+                      </div>
+                    </div>
+                  <% end %>
                 <% end %>
               </div>
             </div>
@@ -102,6 +120,21 @@
                 <div class="mt-4">
                   <%= turbo_frame_tag "walk_details_#{walk.id}" do %>
                     <%= render partial: 'walks/show_details', locals: { walk: walk, user_walk: @user_walk } %>
+                    <div class="mt-4">
+                      <h4 class="text-lg font-semibold mb-2">Chiens inscrits :</h4>
+                      <div class="avatar-group -space-x-4 rtl:space-x-reverse">
+                        <% walk.users.includes(:dog).each do |user| %>
+                          <% if user.dog.present? %>
+                            <div class="avatar">
+                              <div class="w-10">
+                                <%= dog_photo_tag(user.dog, size: :large) %>
+                                <div class="text-xs text-center mt-1"><%= user.dog.name %></div>
+                              </div>
+                            </div>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </div>
                   <% end %>
                 </div>
               </div>

@@ -482,7 +482,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails (~> 1.2.3)
   kamal
-  pg
+  pg (~> 1.1)
   pg_search
   propshaft
   puma (>= 5.0)

@@ -14,6 +14,8 @@ User.destroy_all
 # Create a user with admin role
 User.create!(
   email: 'admin@example.com',
+  first_name: 'Alex',
+  last_name: 'Dog-Harmonie',
   password: 'password',
   password_confirmation: 'password',
   admin: true

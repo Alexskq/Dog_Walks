@@ -16,6 +16,7 @@ class WalksController < ApplicationController
   def create
     @walk = Walk.new(walk_params)
     @walk.users << current_user if user_signed_in?
+    @walk.validated = current_user&.admin? || false
 
     if @walk.save
       redirect_to walks_path, notice: I18n.t('walk_created', locale: :fr)

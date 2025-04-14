@@ -23,6 +23,7 @@ Rails
       resources :walks do
         member do
           post :validate
+          post :invalidate
         end
       end
     end

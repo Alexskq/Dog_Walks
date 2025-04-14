@@ -1,7 +1,7 @@
 class Admin::WalksController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
-  before_action :set_walk, only: %i[show validate]
+  before_action :set_walk, only: %i[show validate invalidate]
 
   def index
     @walks = Walk.all.order(date: :asc)
@@ -12,8 +12,13 @@ class Admin::WalksController < ApplicationController
   end
 
   def validate
-    @walk.update(validated: true)
+    @walk.update(validated: true, invalidated: false)
     redirect_to admin_walks_path, notice: 'La balade a été validée avec succès.'
+  end
+
+  def invalidate
+    @walk.update(validated: false, invalidated: true)
+    redirect_to admin_walks_path, notice: 'La balade a été invalidée avec succès.'
   end
 
   private

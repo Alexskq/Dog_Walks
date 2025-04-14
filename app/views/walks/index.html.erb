@@ -52,7 +52,9 @@
           <div class="card-body border border-[#c59f60] rounded-lg p-4 lg:p-6" data-controller="modal">
             <div class="flex justify-center gap-8 items-center">
               <h2 class="card-title text-lg sm:text-xl"><%= walk.name %></h2>
-              <% if walk.validated? %>
+              <% if walk.invalidated? %>
+                <span class="badge badge-error">Invalidée</span>
+              <% elsif walk.validated? %>
                 <span class="badge badge-success">Validée</span>
               <% else %>
                 <span class="badge badge-warning">En attente</span>
@@ -93,55 +95,63 @@
               </div>
             </div>
             <div class="flex flex-col sm:flex-row sm:justify-center sm:gap-4 gap-2 mt-4">
-              <button class="btn btn-primary w-full sm:w-auto" onclick="signup_modal_<%= walk.id %>.showModal()">S'inscrire</button>
-              <button class="btn btn-active btn-default w-full sm:w-auto" onclick="details_modal_<%= walk.id %>.showModal()">Voir le details</button>
+              <button class="btn btn-primary w-full sm:w-auto <%= walk.invalidated? ? 'opacity-50 cursor-not-allowed' : '' %>" 
+                      onclick="signup_modal_<%= walk.id %>.showModal()"
+                      <%= walk.invalidated? ? 'disabled' : '' %>>
+                S'inscrire
+              </button>
+              <button class="btn btn-active btn-default w-full sm:w-auto <%= walk.invalidated? ? 'opacity-50 cursor-not-allowed' : '' %>" 
+                      onclick="details_modal_<%= walk.id %>.showModal()"
+                      <%= walk.invalidated? ? 'disabled' : '' %>>
+                Voir le details
+              </button>
             </div>
 
             <%# 1ere modal s'inscrire %>
             <dialog id="signup_modal_<%= walk.id %>" class="modal">
-              <div class="modal-box w-11/12 max-w-2xl">
-                <form method="dialog">
-                  <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" data-action="click->modal#close">✕</button>
-                </form>
-                <h3 class="text-lg font-bold text-center mb-2">Balade : <%= walk.name %></h3>
-                <hr class="border border-[#c59f60] w-[60%] mx-auto m-2">
-                <%= render 'user_walks/form', walk: walk, user_walk: @user_walk %>
-              </div>
-            </dialog>
-
-            <%# 2eme modal "Voir details" %>
-            <dialog id="details_modal_<%= walk.id %>" class="modal">
-              <div class="modal-box w-11/12 max-w-2xl">
-                <form method="dialog">
-                  <button id="close-modal-btn" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                </form>
-                <h3 class="text-lg font-bold text-center"><%= walk.name %></h3>
-                <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
-                <div class="mt-4">
-                  <%= turbo_frame_tag "walk_details_#{walk.id}" do %>
-                    <%= render partial: 'walks/show_details', locals: { walk: walk, user_walk: @user_walk } %>
-                    <div class="mt-4">
-                      <h4 class="text-lg font-semibold mb-2">Chiens inscrits :</h4>
-                      <div class="avatar-group -space-x-4 rtl:space-x-reverse">
-                        <% walk.users.includes(:dog).each do |user| %>
-                          <% if user.dog.present? %>
-                            <div class="avatar">
-                              <div class="w-10">
-                                <%= dog_photo_tag(user.dog, size: :large) %>
-                                <div class="text-xs text-center mt-1"><%= user.dog.name %></div>
-                              </div>
-                            </div>
-                          <% end %>
-                        <% end %>
-                      </div>
-                    </div>
-                  <% end %>
+                <div class="modal-box w-11/12 max-w-2xl">
+                  <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" data-action="click->modal#close">✕</button>
+                  </form>
+                  <h3 class="text-lg font-bold text-center mb-2">Balade : <%= walk.name %></h3>
+                  <hr class="border border-[#c59f60] w-[60%] mx-auto m-2">
+                  <%= render 'user_walks/form', walk: walk, user_walk: @user_walk %>
                 </div>
-              </div>
-            </dialog>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+              </dialog>
+
+              <%# 2eme modal "Voir details" %>
+              <dialog id="details_modal_<%= walk.id %>" class="modal">
+                <div class="modal-box w-11/12 max-w-2xl">
+                  <form method="dialog">
+                    <button id="close-modal-btn" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                  </form>
+                  <h3 class="text-lg font-bold text-center"><%= walk.name %></h3>
+                  <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
+                  <div class="mt-4">
+                    <%= turbo_frame_tag "walk_details_#{walk.id}" do %>
+                      <%= render partial: 'walks/show_details', locals: { walk: walk, user_walk: @user_walk } %>
+                      <div class="mt-4">
+                        <h4 class="text-lg font-semibold mb-2">Chiens inscrits :</h4>
+                        <div class="avatar-group -space-x-4 rtl:space-x-reverse">
+                          <% walk.users.includes(:dog).each do |user| %>
+                            <% if user.dog.present? %>
+                              <div class="avatar">
+                                <div class="w-10">
+                                  <%= dog_photo_tag(user.dog, size: :large) %>
+                                  <div class="text-xs text-center mt-1"><%= user.dog.name %></div>
+                                </div>
+                              </div>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </dialog>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>

@@ -6,7 +6,9 @@
     <p><strong>Nombre de places max :</strong> <%= @walk.number_of_dog %></p>
     <p class="flex items-center gap-2">
       <strong>Statut :</strong>
-      <% if @walk.validated? %>
+      <% if @walk.invalidated? %>
+        <span class="badge badge-error">Invalidée</span>
+      <% elsif @walk.validated? %>
         <span class="badge badge-success">Validée</span>
       <% else %>
         <span class="badge badge-warning">En attente</span>

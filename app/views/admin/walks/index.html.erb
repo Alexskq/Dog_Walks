@@ -19,7 +19,9 @@
                 <span class="text-sm text-gray-500"><%= walk.date.strftime("%d/%m/%Y %H:%M") %></span>
                 <span class="text-sm text-gray-500"><%= walk.address %></span>
                 <span class="text-sm text-gray-500"><%= pluralize(walk.users.count, 'participant') %></span>
-                <% if walk.validated? %>
+                <% if walk.invalidated? %>
+                  <span class="badge badge-error">Invalidée</span>
+                <% elsif walk.validated? %>
                   <span class="badge badge-success">Validée</span>
                 <% else %>
                   <span class="badge badge-warning">En attente</span>
@@ -28,10 +30,16 @@
             </div>
             <div class="flex items-center justify-between sm:justify-end gap-2">
               <div class="flex gap-2" onclick="event.stopPropagation();">
-
-                <% unless walk.validated? %>
+                <% if walk.validated? %>
+                  <%= button_to invalidate_admin_walk_path(walk), method: :post, class: "btn btn-sm btn-error" do %>
+                    <i class="fas fa-times"></i>
+                  <% end %>
+                <% else %>
                   <%= button_to validate_admin_walk_path(walk), method: :post, class: "btn btn-sm btn-success" do %>
                     <i class="fas fa-check"></i>
+                  <% end %>
+                  <%= button_to invalidate_admin_walk_path(walk), method: :post, class: "btn btn-sm btn-error" do %>
+                    <i class="fas fa-times"></i>
                   <% end %>
                 <% end %>
               </div>

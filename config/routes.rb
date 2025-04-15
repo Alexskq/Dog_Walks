@@ -14,7 +14,7 @@ Rails
 
     resource :dog, only: [:update]
 
-    root to: 'pages#home' # rubocop:disable Style/StringLiterals
+    root to: 'splash#index' # rubocop:disable Style/StringLiterals
 
     get "/profil", to: "pages#profil", as: 'profil'
     delete "/destroy_user_walk", to: "pages#destroy_user_walk"

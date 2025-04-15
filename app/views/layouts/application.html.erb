@@ -38,6 +38,10 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
+
+    <style>
+     
+    </style>
   </head>
 
   <body class="mesh-gradient-custom min-h-screen <%= params['action'] == 'new' && params['controller'] == 'walks' ? 'h-screen' : 'h-full' %>">
@@ -51,7 +55,9 @@
       <p class="alert"><%= alert %></p>
     <% end %>
     
+    <div class="page-transition">
       <%= yield %>
+    </div>
    
   </body>
 </html>

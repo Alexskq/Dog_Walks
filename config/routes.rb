@@ -16,6 +16,8 @@ Rails
 
     root to: 'splash#index' # rubocop:disable Style/StringLiterals
 
+    get "/home", to: "pages#home", as: 'home'
+
     get "/profil", to: "pages#profil", as: 'profil'
     delete "/destroy_user_walk", to: "pages#destroy_user_walk"
 

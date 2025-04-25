@@ -26,8 +26,8 @@
         </svg>
       </div>
       <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full">
-        <li><%= link_to 'Toutes les balades', root_path(view_type: 'all'), class: 'text-center' %></li>
-        <li><%= link_to 'Mes balades inscrites', root_path(view_type: 'my_walks'), class: 'text-center' %></li>
+        <li><%= link_to 'Toutes les balades', home_path(view_type: 'all'), class: 'text-center' %></li>
+        <li><%= link_to 'Mes balades inscrites', home_path(view_type: 'my_walks'), class: 'text-center' %></li>
       </ul>
     </div>
 
@@ -35,7 +35,7 @@
     <div class="hidden lg:flex flex-col items-center gap-4">
       <h2 class="text-2xl font-semibold text-center tracking-wider">Les prochaines Balades</h2>
       <div class="flex gap-4">
-        <%= link_to root_path(view_type: 'all'), 
+        <%= link_to home_path(view_type: 'all'), 
             class: "btn #{params[:view_type] == 'all' || params[:view_type].nil? ? 'btn-primary' : 'btn-ghost'} transition-all duration-300 hover:scale-105" do %>
           <span class="flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,7 +44,7 @@
             Toutes les balades
           </span>
         <% end %>
-        <%= link_to root_path(view_type: 'my_walks'), 
+        <%= link_to home_path(view_type: 'my_walks'), 
             class: "btn #{params[:view_type] == 'my_walks' ? 'btn-primary' : 'btn-ghost'} transition-all duration-300 hover:scale-105" do %>
           <span class="flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

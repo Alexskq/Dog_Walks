@@ -1,6 +1,6 @@
 <div class="navbar border-b-2 border-amber-500">
   <div class="flex-1 justify-between ">
-    <%= link_to "DH Balades", root_path, class: "btn btn-ghost text-xl font-luckiest tracking-wide" %>
+    <%= link_to "DH Balades", home_path, class: "btn btn-ghost text-xl font-luckiest tracking-wide" %>
     <% if current_user&.admin? %>
       <%= link_to admin_walks_path, class: "btn btn-ghost text-lg relative mr-4" do %>
         <%= image_tag "shield.png", class: "w-5 h-5" %>

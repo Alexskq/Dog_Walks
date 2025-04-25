@@ -19,7 +19,12 @@ module Users
     #   super
     # end
 
-    # protected
+    protected
+
+    # Rediriger vers la page d'accueil au lieu du splash screen après connexion
+    def after_sign_in_path_for(resource)
+      home_path # Rediriger vers la page d'accueil
+    end
 
     # If you have extra params to permit, append them to the sanitizer.
     # def configure_sign_in_params

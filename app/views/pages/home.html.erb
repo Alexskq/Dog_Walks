@@ -65,93 +65,98 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full lg:w-[70vw] mx-auto">
-      <% @closest_walks.each do |walk| %>
-        <div class="card border border-[#c59f60] shadow-xl rounded-lg w-full ">
-          <div class="flex flex-col flex-auto gap-2 rounded-lg p-4">
-            <div class="flex justify-center gap-8 items-center">
-              <h2 class="card-title text-lg sm:text-xl"><%= walk.name %></h2>
-              <% if walk.invalidated? %>
-                <span class="badge badge-error">Invalidée</span>
-              <% elsif walk.validated? %>
-                <span class="badge badge-success">Validée</span>
-              <% else %>
-                <span class="badge badge-warning">En attente</span>
-              <% end %>
-            </div>
-            <div class="flex gap-2 items-center text-sm sm:text-base">
-              <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>
-              <p><%= walk.description %></p>
-            </div>
-            <div class="flex items-center gap-2 text-sm sm:text-base">
-              <%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "date", height: 20  %>
-              <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
-            </div>
-            <div class="flex items-center gap-2 text-sm sm:text-base">
-              <%= image_tag "https://img.icons8.com/?size=20&id=13778&format=png&color=000000", alt: "address" %>
-              <span><%= walk.address %></span>
-            </div>
-            <div class="flex flex-col  gap-2">
-              <div class="flex items-center gap-2 grow text-sm sm:text-base">
-                <%= image_tag "https://img.icons8.com/?size=20&id=9201&format=png&color=db924b", alt: "number of dog" %>
-                <span><%= walk.number_of_dog %> chien(s) max</span>
-              </div>
+    <% if @closest_walks.empty? %>
+      <p class="text-center text-sm sm:text-base mx-auto">Aucune balade prochainement planifiée</p>
+    <% else %>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full lg:w-[70vw] mx-auto">
+        <% @closest_walks.each do |walk| %>
 
-              <div class="flex justify-between items-center">
-                <div class="avatar-group -space-x-4 rtl:space-x-reverse">
-                  <% walk.users.includes(:dog).each do |user| %>
-                    <% if user.dog.present? %>
-                      <div class="avatar">
-                        <div class="w-6">
-                          <%= dog_photo_tag(user.dog, size: :small) %>
-                        </div>
-                      </div>
-                    <% end %>
-                  <% end %>
+          <div class="card border border-[#c59f60] shadow-xl rounded-lg w-full ">
+            <div class="flex flex-col flex-auto gap-2 rounded-lg p-4">
+              <div class="flex justify-center gap-8 items-center">
+                <h2 class="card-title text-lg sm:text-xl"><%= walk.name %></h2>
+                <% if walk.invalidated? %>
+                  <span class="badge badge-error">Invalidée</span>
+                <% elsif walk.validated? %>
+                  <span class="badge badge-success">Validée</span>
+                <% else %>
+                  <span class="badge badge-warning">En attente</span>
+                <% end %>
+              </div>
+              <div class="flex gap-2 items-center text-sm sm:text-base">
+                <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>
+                <p><%= walk.description %></p>
+              </div>
+              <div class="flex items-center gap-2 text-sm sm:text-base">
+                <%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "date", height: 20  %>
+                <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
+              </div>
+              <div class="flex items-center gap-2 text-sm sm:text-base">
+                <%= image_tag "https://img.icons8.com/?size=20&id=13778&format=png&color=000000", alt: "address" %>
+                <span><%= walk.address %></span>
+              </div>
+              <div class="flex flex-col  gap-2">
+                <div class="flex items-center gap-2 grow text-sm sm:text-base">
+                  <%= image_tag "https://img.icons8.com/?size=20&id=9201&format=png&color=db924b", alt: "number of dog" %>
+                  <span><%= walk.number_of_dog %> chien(s) max</span>
                 </div>
 
-                <% if params[:view_type] == 'all' %>
-                  <div class="card-actions self-end" onclick="signup_modal_<%= walk.id %>.showModal()">
-                    <span class=" font-bold text-2xl sm:text-3xl text-black bg-primary rounded-full h-8 w-8 sm:h-10 sm:w-10 text-center pr-[0.1rem] !mr-2">+</span>
+                <div class="flex justify-between items-center">
+                  <div class="avatar-group -space-x-4 rtl:space-x-reverse">
+                    <% walk.users.includes(:dog).each do |user| %>
+                      <% if user.dog.present? %>
+                        <div class="avatar">
+                          <div class="w-6">
+                            <%= dog_photo_tag(user.dog, size: :small) %>
+                          </div>
+                        </div>
+                      <% end %>
+                    <% end %>
                   </div>
-                <% else %>
-                  <div class="card-actions self-end">
-                    <button class="btn btn-primary" onclick="details_modal_<%= walk.id %>.showModal()" <%= walk.invalidated? ? 'disabled' : '' %>>Voir la balade</button>
+
+                  <% if params[:view_type] == 'all' %>
+                    <div class="card-actions self-end" onclick="signup_modal_<%= walk.id %>.showModal()">
+                      <span class=" font-bold text-2xl sm:text-3xl text-black bg-primary rounded-full h-8 w-8 sm:h-10 sm:w-10 text-center pr-[0.1rem] !mr-2">+</span>
+                    </div>
+                  <% else %>
+                    <div class="card-actions self-end">
+                      <button class="btn btn-primary" onclick="details_modal_<%= walk.id %>.showModal()" <%= walk.invalidated? ? 'disabled' : '' %>>Voir la balade</button>
                   </div>
                 <% end %>
               </div>
-                    </div>
-                  </div>
-
-                  <%# modal d'inscription %>
-                  <dialog id="signup_modal_<%= walk.id %>" class="modal">
-                    <div class="modal-box w-11/12 max-w-2xl">
-                      <form method="dialog">
-                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" data-action="click->modal#close">✕</button>
-                      </form>
-                      <h3 class="text-lg font-bold text-center mb-2">Balade : <%= walk.name %></h3>
-                      <hr class="border border-[c] w-[60%] mx-auto m-2">
-                      <%= render 'user_walks/form', walk: walk, user_walk: @user_walk %>
-                    </div>
-                  </dialog>
-
-                  <%# modal details %>
-                  <dialog id="details_modal_<%= walk.id %>" class="modal">
-                    <div class="modal-box w-11/12 max-w-2xl">
-                      <form method="dialog">
-                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                      </form>
-                      <h3 class="text-lg font-bold text-center"><%= walk.name %></h3>
-                      <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
-                      <div class="mt-4">
-                        <%= turbo_frame_tag "walk_details_#{walk.id}" do %>
-                          <%= render partial: 'walks/show_details', locals: { walk: walk, user_walk: @user_walk } %>
-                        <% end %>
                       </div>
                     </div>
-                  </dialog>
-                </div>
-              <% end %>
+
+                    <%# modal d'inscription %>
+                    <dialog id="signup_modal_<%= walk.id %>" class="modal">
+                      <div class="modal-box w-11/12 max-w-2xl">
+                        <form method="dialog">
+                          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" data-action="click->modal#close">✕</button>
+                        </form>
+                        <h3 class="text-lg font-bold text-center mb-2">Balade : <%= walk.name %></h3>
+                        <hr class="border border-[c] w-[60%] mx-auto m-2">
+                        <%= render 'user_walks/form', walk: walk, user_walk: @user_walk %>
+                      </div>
+                    </dialog>
+
+                    <%# modal details %>
+                    <dialog id="details_modal_<%= walk.id %>" class="modal">
+                      <div class="modal-box w-11/12 max-w-2xl">
+                        <form method="dialog">
+                          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <h3 class="text-lg font-bold text-center"><%= walk.name %></h3>
+                        <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
+                        <div class="mt-4">
+                          <%= turbo_frame_tag "walk_details_#{walk.id}" do %>
+                            <%= render partial: 'walks/show_details', locals: { walk: walk, user_walk: @user_walk } %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </dialog>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>

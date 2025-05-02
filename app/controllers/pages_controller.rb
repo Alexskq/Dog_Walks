@@ -8,11 +8,11 @@ class PagesController < ApplicationController
       @closest_walks = current_user.user_walks.includes(:walk).map(&:walk).sort_by(&:created_at).reverse
       @dropdown_title = 'Mes balades inscrites'
     else
-      @closest_walks = Walk.order('created_at DESC').limit(3)
+      @closest_walks = Walk.where('date >= ?', Date.today).order('created_at DESC').limit(3)
       @dropdown_title = 'Toutes les balades'
     end
 
-    @walks = Walk.all
+    @walks = Walk.where('date >= ?', Date.today)
     @markers = @walks.geocoded.map do |walk|
       {
         lat: walk.latitude,

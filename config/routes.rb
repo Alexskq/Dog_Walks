@@ -25,10 +25,10 @@ Rails
     delete "/destroy_user_walk", to: "pages#destroy_user_walk"
 
     namespace :admin do
-      resources :walks do
+      resources :walks, only: [:index, :show] do
         member do
-          post :validate
-          post :invalidate
+          post :validate_participant
+          post :invalidate_participant
         end
       end
     end

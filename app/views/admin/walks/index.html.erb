@@ -19,29 +19,14 @@
                 <span class="text-sm text-gray-500"><%= walk.date.strftime("%d/%m/%Y %H:%M") %></span>
                 <span class="text-sm text-gray-500"><%= walk.address %></span>
                 <span class="text-sm text-gray-500"><%= pluralize(walk.users.count, 'participant') %></span>
-                <% if walk.invalidated? %>
-                  <span class="badge badge-error">Invalidée</span>
-                <% elsif walk.validated? %>
-                  <span class="badge badge-success">Validée</span>
-                <% else %>
-                  <span class="badge badge-warning">En attente</span>
-                <% end %>
+
               </div>
             </div>
             <div class="flex items-center justify-between sm:justify-end gap-2">
               <div class="flex gap-2" onclick="event.stopPropagation();">
-                <% if walk.validated? %>
-                  <%= button_to invalidate_admin_walk_path(walk), method: :post, class: "btn btn-sm btn-error" do %>
-                    <i class="fas fa-times"></i>
-                  <% end %>
-                <% else %>
-                  <%= button_to validate_admin_walk_path(walk), method: :post, class: "btn btn-sm btn-success" do %>
-                    <i class="fas fa-check"></i>
-                  <% end %>
-                  <%= button_to invalidate_admin_walk_path(walk), method: :post, class: "btn btn-sm btn-error" do %>
-                    <i class="fas fa-times"></i>
-                  <% end %>
-                <% end %>
+                <div id="walk_status_<%= walk.id %>">
+                  <%= render "walk_status", walk: walk %>
+                </div>
               </div>
               <i class="fas fa-chevron-down text-gray-400 toggle-icon"></i>
             </div>
@@ -55,19 +40,25 @@
                   <th>Nom</th>
                   <th class="hidden sm:table-cell">Email</th>
                   <th>Chien</th>
+                  <th>Statut</th>
                 </tr>
               </thead>
               <tbody>
-                <% walk.users.each do |user| %>
+                <% walk.user_walks.includes(user: :dog).each do |user_walk| %>
                   <tr>
-                    <td><%= user.first_name %> <%= user.last_name %></td>
-                    <td class="hidden sm:table-cell"><%= user.email %></td>
+                    <td><%= user_walk.user.first_name %> <%= user_walk.user.last_name %></td>
+                    <td class="hidden sm:table-cell"><%= user_walk.user.email %></td>
                     <td>
-                      <% if user.dog %>
-                        <%= user.dog.name %>
+                      <% if user_walk.user.dog %>
+                        <%= user_walk.user.dog.name %>
                       <% else %>
                         <span class="text-gray-400">Aucun chien</span>
                       <% end %>
+                    </td>
+                    <td>
+                      <div id="participant_status_<%= user_walk.id %>">
+                        <%= render "participant_status", user_walk: user_walk, walk: walk %>
+                      </div>
                     </td>
                   </tr>
                 <% end %>

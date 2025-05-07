@@ -1,0 +1,27 @@
+<%= turbo_frame_tag "participant_status_#{user_walk.id}" do %>
+  <div class="flex items-center gap-2">
+    <% if user_walk.invalidated? %>
+      <span class="badge badge-error">Invalidé</span>
+    <% elsif user_walk.validated? %>
+      <span class="badge badge-success">Validé</span>
+    <% else %>
+      <span class="badge badge-warning">En attente</span>
+    <% end %>
+    <div class="flex gap-2" onclick="event.stopPropagation();">
+      <% if user_walk.validated? %>
+        <%= button_to invalidate_participant_admin_walk_path(walk, user_walk_id: user_walk.id), method: :post, class: "btn btn-sm btn-error", data: { turbo: true } do %>
+          <i class="fas fa-times"></i>
+        <% end %>
+      <% else %>
+        <%= button_to validate_participant_admin_walk_path(walk, user_walk_id: user_walk.id), method: :post, class: "btn btn-sm btn-success", data: { turbo: true } do %>
+          <i class="fas fa-check"></i>
+        <% end %>
+        <% unless user_walk.invalidated? %>
+          <%= button_to invalidate_participant_admin_walk_path(walk, user_walk_id: user_walk.id), method: :post, class: "btn btn-sm btn-error", data: { turbo: true } do %>
+            <i class="fas fa-times"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

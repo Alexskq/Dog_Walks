@@ -1,0 +1,7 @@
+<% if walk.user_walks.all?(&:validated?) %>
+  <span class="badge badge-success">Tous validés</span>
+<% elsif walk.user_walks.any?(&:invalidated?) %>
+  <span class="badge badge-error">Certains invalidés</span>
+<% else %>
+  <span class="badge badge-warning">En attente</span>
+<% end %> 

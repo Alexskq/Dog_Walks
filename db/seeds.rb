@@ -8,8 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-puts 'Destroying users...'
+puts 'Destroying existing data...'
+Dog.destroy_all
 User.destroy_all
+puts 'Data destroyed.'
 
 # Create a user with admin role
 admin = User.create!(
@@ -28,4 +30,4 @@ Dog.create!(
   description: 'Un chien fidèle et intelligent',
   user: admin
 )
-puts 'Done...'
+puts 'Seed completed successfully!'

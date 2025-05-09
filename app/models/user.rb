@@ -8,7 +8,7 @@ class User < ApplicationRecord
          :validatable
 
   has_one :dog, dependent: :destroy
-  accepts_nested_attributes_for :dog
+  accepts_nested_attributes_for :dog, allow_destroy: true, reject_if: :all_blank
 
   has_one_attached :avatar
 

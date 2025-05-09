@@ -82,6 +82,8 @@ module Users
 
     # Initialiser l'objet Dog
     def build_dog
+      return unless params[:user] && params[:user][:dog_attributes].present?
+
       build_resource.dog ||= Dog.new
     end
 

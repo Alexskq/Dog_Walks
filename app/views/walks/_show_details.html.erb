@@ -1,39 +1,55 @@
 <%= turbo_frame_tag "walk_details_#{walk.id}" do %>
-  <div class="space-y-4">
-    <div class="flex gap-2 items-center">
-      <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>
-      <p><%= walk.description %></p>
-    </div>
-    <div class="flex items-center  gap-2">
-      <%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "date", height: 20  %>
-      <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
-    </div>
-    <div class="flex items-center gap-2">
-      <%= image_tag "https://img.icons8.com/?size=20&id=13778&format=png&color=000000", alt: "address" %>
-      <span><%= walk.address %></span>
-    </div>
-    <div class="flex items-center gap-2">
-      <div class="flex items-center gap-2 grow">
-        <%= image_tag "https://img.icons8.com/?size=20&id=9201&format=png&color=db924b", alt: "number of dog" %>
-        <span><%= walk.number_of_dog %> chien(s) max</span>
+  <div class="flex flex-col gap-2">
+    <% if walk.admin_message.present? %>
+      <div class="alert alert-info mb-4">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div>
+            <h3 class="font-bold">Message de l'administrateur</h3>
+            <p><%= walk.admin_message %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="space-y-4">
+      <div class="flex gap-2 items-center">
+        <%= image_tag "https://img.icons8.com/?size=20&id=13830&format=png&color=66350C", alt: "description" %>
+        <p><%= walk.description %></p>
+      </div>
+      <div class="flex items-center  gap-2">
+        <%= image_tag "https://img.icons8.com/?size=20&id=12776&format=png&color=000000", alt: "date", height: 20  %>
+        <span><%= walk.date.nil? ? 'Non défini' : l(walk.date, format: :short, locale: :fr) %></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <%= image_tag "https://img.icons8.com/?size=20&id=13778&format=png&color=000000", alt: "address" %>
+        <span><%= walk.address %></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 grow">
+          <%= image_tag "https://img.icons8.com/?size=20&id=9201&format=png&color=db924b", alt: "number of dog" %>
+          <span><%= walk.number_of_dog %> chien(s) max</span>
+
+        </div>
 
       </div>
 
+
+      <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
+
+      <% if walk.user_walks.any? %>
+        <div>
+          <p class="text-center mb-2"><strong>Participants -</strong> (<%= walk.user_walks.count %>/<%= walk.number_of_dog %>)</p>
+
+          <ul class="list-disc list-inside">
+            <% walk.user_walks.each do |user_walk| %>
+              <li><%= user_walk.user.first_name %> - <%= user_walk.user.dog.name %> </li>
+            <% end %>
+          </ul>
+
+        <% end %>
+      </div>
     </div>
-
-
-    <hr class="border border-[#c59f60] w-[60%] mx-auto m-4">
-
-    <% if walk.user_walks.any? %>
-      <div>
-        <p class="text-center mb-2"><strong>Participants -</strong> (<%= walk.user_walks.count %>/<%= walk.number_of_dog %>)</p>
-
-        <ul class="list-disc list-inside">
-          <% walk.user_walks.each do |user_walk| %>
-            <li><%= user_walk.user.first_name %> - <%= user_walk.user.dog.name %> </li>
-          <% end %>
-        </ul>
-
-      <% end %>
-    </div>
-  <% end %>
+  </div>
+<% end %>

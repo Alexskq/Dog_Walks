@@ -19,7 +19,6 @@
                 <span class="text-sm text-gray-500"><%= walk.date.strftime("%d/%m/%Y %H:%M") %></span>
                 <span class="text-sm text-gray-500"><%= walk.address %></span>
                 <span class="text-sm text-gray-500"><%= pluralize(walk.users.count, 'participant') %></span>
-
               </div>
             </div>
             <div class="flex items-center justify-between sm:justify-end gap-2">
@@ -33,6 +32,13 @@
           </div>
         </summary>
         <div class="p-4 bg-base-200 rounded-b-box">
+          <%= form_with(model: [:admin, walk], url: update_admin_message_admin_walk_path(walk), method: :patch, class: "mb-4") do |f| %>
+            <div class="form-control">
+              <%= f.label :admin_message, "Message administrateur", class: "label" %>
+              <%= f.text_area :admin_message, class: "textarea textarea-bordered h-24", placeholder: "Ajouter un message pour les participants..." %>
+            </div>
+            <%= f.submit "Mettre à jour le message", class: "btn btn-primary mt-2" %>
+          <% end %>
           <div class="overflow-x-auto -mx-4 sm:mx-0">
             <table class="table table-zebra w-full">
               <thead>

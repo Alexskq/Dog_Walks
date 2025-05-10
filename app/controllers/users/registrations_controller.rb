@@ -14,9 +14,9 @@ module Users
     # POST /resource
     def create
       super do |resource|
-        if resource.persisted? && !resource.avatar.attached?
-          # Attach a default avatar if none is provided
-          # This is optional - you can remove this if you don't want to attach a default avatar
+        if resource.persisted?
+          # Ne rien faire si l'utilisateur n'a pas fourni de photo
+          # Les photos par défaut seront utilisées dans les vues
         end
       end
     end

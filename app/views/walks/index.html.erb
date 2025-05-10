@@ -52,10 +52,10 @@
           <div class="card-body border border-[#c59f60] rounded-lg p-4 lg:p-6" data-controller="modal">
             <div class="flex justify-center gap-8 items-center">
               <h2 class="card-title text-lg sm:text-xl"><%= walk.name %></h2>
-              <% if walk.invalidated? %>
-                <span class="badge badge-error">Invalidée</span>
-              <% elsif walk.validated? %>
-                <span class="badge badge-success">Validée</span>
+              <% if walk.user_walks.all?(&:validated?) %>
+                <span class="badge badge-success">Tous validés</span>
+              <% elsif walk.user_walks.any?(&:invalidated?) %>
+                <span class="badge badge-error">Certains invalidés</span>
               <% else %>
                 <span class="badge badge-warning">En attente</span>
               <% end %>
@@ -95,14 +95,14 @@
               </div>
             </div>
             <div class="flex flex-col sm:flex-row sm:justify-center sm:gap-4 gap-2 mt-4">
-              <button class="btn btn-primary w-full sm:w-auto <%= walk.invalidated? ? 'opacity-50 cursor-not-allowed' : '' %>" 
+              <button class="btn btn-primary w-full sm:w-auto <%= walk_has_invalidated_participants?(walk) ? 'opacity-50 cursor-not-allowed' : '' %>" 
                       onclick="signup_modal_<%= walk.id %>.showModal()"
-                      <%= walk.invalidated? ? 'disabled' : '' %>>
+                      <%= walk_has_invalidated_participants?(walk) ? 'disabled' : '' %>>
                 S'inscrire
               </button>
-              <button class="btn btn-active btn-default w-full sm:w-auto <%= walk.invalidated? ? 'opacity-50 cursor-not-allowed' : '' %>" 
+              <button class="btn btn-active btn-default w-full sm:w-auto <%= walk_has_invalidated_participants?(walk) ? 'opacity-50 cursor-not-allowed' : '' %>" 
                       onclick="details_modal_<%= walk.id %>.showModal()"
-                      <%= walk.invalidated? ? 'disabled' : '' %>>
+                      <%= walk_has_invalidated_participants?(walk) ? 'disabled' : '' %>>
                 Voir le details
               </button>
             </div>

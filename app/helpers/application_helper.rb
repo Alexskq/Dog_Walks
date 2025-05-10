@@ -16,4 +16,8 @@ module ApplicationHelper
                 class: "rounded-full #{size == :small ? 'w-6 h-6' : 'w-10 h-10'} object-cover bg-gray-200"
     end
   end
+
+  def walk_has_invalidated_participants?(walk)
+    walk.user_walks.any?(&:invalidated?)
+  end
 end

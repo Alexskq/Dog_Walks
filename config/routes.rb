@@ -29,6 +29,7 @@ Rails
         member do
           post :validate_participant
           post :invalidate_participant
+          patch :update_admin_message
         end
       end
     end

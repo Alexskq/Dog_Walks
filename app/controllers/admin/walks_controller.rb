@@ -1,7 +1,7 @@
 class Admin::WalksController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
-  before_action :set_walk, only: %i[show validate_participant invalidate_participant]
+  before_action :set_walk, only: %i[show validate_participant invalidate_participant update_admin_message]
 
   def index
     @walks = Walk.all.order(date: :asc)
@@ -62,6 +62,23 @@ class Admin::WalksController < ApplicationController
         ]
       end
       format.html { redirect_to admin_walks_path, notice: 'Le participant a été invalidé avec succès.' }
+    end
+  end
+
+  def update_admin_message
+    if @walk.update(admin_message: params[:walk][:admin_message])
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(
+            "walk_details_#{@walk.id}",
+            partial: 'walks/show_details',
+            locals: { walk: @walk, user_walk: nil }
+          )
+        end
+        format.html { redirect_to admin_walks_path, notice: 'Le message a été mis à jour avec succès.' }
+      end
+    else
+      redirect_to admin_walks_path, alert: 'Erreur lors de la mise à jour du message.'
     end
   end
 
